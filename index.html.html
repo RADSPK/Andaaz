@@ -3,54 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HR Dashboard - AHKF</title>
+    <title>HR Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-        /* Modern Orange Theme */
+        /* Light Theme Variables: Muted Burgundy & Grey */
         :root {
-            --primary-orange: #FF6B35;
-            --secondary-orange: #F7931E;
-            --deep-orange: #E85D04;
-            --light-orange: #FFB08A;
-            --cream-bg: #FFF8F3;
-            --card-white: #FFFFFF;
-            --text-dark: #2D3142;
-            --text-light: #6B7280;
-            --border-light: #FFE5D9;
-            --success: #10B981;
-            --warning: #F59E0B;
-            --danger: #EF4444;
-            
-            /* Spacing */
-            --space-xs: 0.5rem;
-            --space-sm: 1rem;
-            --space-md: 1.5rem;
-            --space-lg: 2rem;
-            --space-xl: 3rem;
-            
-            /* Borders */
-            --radius-sm: 0.75rem;
-            --radius-md: 1rem;
-            --radius-lg: 1.5rem;
-            --radius-xl: 2rem;
-            
-            /* Shadows */
-            --shadow-sm: 0 2px 8px rgba(255, 107, 53, 0.08);
-            --shadow-md: 0 4px 16px rgba(255, 107, 53, 0.12);
-            --shadow-lg: 0 8px 32px rgba(255, 107, 53, 0.16);
-            --shadow-xl: 0 12px 48px rgba(255, 107, 53, 0.2);
+            --primary-color: #A05252; /* Muted Burgundy */
+            --secondary-color: #666666; /* Medium Grey for subtle text */
+            --background-color: #F9F9F9; /* Very light grey background */
+            --card-bg: #FFFFFF; /* White cards */
+            --text-color: #333333; /* Dark Grey for main text */
+            --border-color: #EAEAEA; /* Light Grey for borders */
+            --light-icon-color: #E0E0E0; /* Very light grey for icons */
+            --border-radius: 12px;
+            --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            --transition-speed: 0.3s;
         }
 
+        /* Dark Theme Variables: Matching Grey Base */
         body.dark-theme {
-            --primary-orange: #FF8C5F;
-            --cream-bg: #0F172A;
-            --card-white: #1E293B;
-            --text-dark: #F1F5F9;
-            --text-light: #94A3B8;
-            --border-light: #334155;
+            --primary-color: #CF9999; /* Lighter Burgundy for dark theme contrast */
+            --secondary-color: #B0B0B0;
+            --background-color: #2D2D2D;
+            --card-bg: #444444;
+            --text-color: #F9F9F9;
+            --border-color: #555555;
+            --light-icon-color: #555555;
         }
 
         * {
@@ -60,499 +41,20 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background: var(--cream-bg);
-            color: var(--text-dark);
-            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: background-color var(--transition-speed), color var(--transition-speed);
         }
 
-        /* TOP NAVIGATION BAR - New Design */
-        .top-navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 80px;
-            background: var(--card-white);
-            backdrop-filter: blur(20px);
-            border-bottom: 2px solid var(--border-light);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            padding: 0 var(--space-xl);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .navbar-brand {
-            display: flex;
-            align-items: center;
-            gap: var(--space-md);
-        }
-
-        .brand-logo {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--primary-orange), var(--deep-orange));
-            border-radius: var(--radius-md);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-
-        .brand-text h1 {
-            font-size: 1.25rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--primary-orange), var(--deep-orange));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            line-height: 1.2;
-        }
-
-        .brand-text p {
-            font-size: 0.75rem;
-            color: var(--text-light);
-            font-weight: 500;
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: var(--space-sm);
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .nav-link {
-            display: flex;
-            align-items: center;
-            gap: var(--space-xs);
-            padding: var(--space-sm) var(--space-md);
-            border-radius: var(--radius-md);
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .nav-link:hover {
-            background: rgba(255, 107, 53, 0.08);
-            color: var(--primary-orange);
-            transform: translateY(-2px);
-        }
-
-        .nav-link.active {
-            background: linear-gradient(135deg, var(--primary-orange), var(--deep-orange));
-            color: white;
-            box-shadow: var(--shadow-md);
-        }
-
-        .nav-link.active i {
-            animation: bounce 0.5s ease;
-        }
-
-        .nav-controls {
-            display: flex;
-            gap: var(--space-sm);
-            align-items: center;
-        }
-
-        .control-btn {
-            width: 44px;
-            height: 44px;
-            border-radius: var(--radius-md);
-            border: 2px solid var(--border-light);
-            background: var(--card-white);
-            color: var(--primary-orange);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-        }
-
-        .control-btn:hover {
-            background: linear-gradient(135deg, var(--primary-orange), var(--deep-orange));
-            color: white;
-            border-color: transparent;
-            transform: scale(1.05);
-        }
-
-        .refresh-btn {
-            padding: var(--space-sm) var(--space-md);
-            border-radius: var(--radius-md);
-            border: none;
-            background: linear-gradient(135deg, var(--primary-orange), var(--deep-orange));
-            color: white;
-            font-weight: 600;
-            font-size: 0.9rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: var(--space-xs);
-            transition: all 0.3s ease;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .refresh-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .refresh-btn.loading i {
-            animation: spin 1s linear infinite;
-        }
-
-        /* MAIN CONTENT AREA */
-        .main-container {
-            margin-top: 80px;
-            padding: var(--space-xl);
-            max-width: 1600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .page-header {
-            margin-bottom: var(--space-xl);
-        }
-
-        .page-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--primary-orange), var(--deep-orange));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: var(--space-xs);
-        }
-
-        .page-subtitle {
-            font-size: 1.1rem;
-            color: var(--text-light);
-            font-weight: 400;
-        }
-
-        /* HERO STATS SECTION - New Design */
-        .hero-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--space-lg);
-            margin-bottom: var(--space-xl);
-        }
-
-        .stat-card {
-            background: var(--card-white);
-            border-radius: var(--radius-lg);
-            padding: var(--space-lg);
-            box-shadow: var(--shadow-md);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary-orange), var(--secondary-orange), var(--deep-orange));
-        }
-
-        .stat-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: var(--shadow-xl);
-        }
-
-        .stat-card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: var(--space-md);
-        }
-
-        .stat-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: var(--radius-md);
-            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(232, 93, 4, 0.05));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            color: var(--primary-orange);
-        }
-
-        .stat-value {
-            font-size: 2.75rem;
-            font-weight: 800;
-            color: var(--primary-orange);
-            line-height: 1;
-            margin-bottom: var(--space-xs);
-        }
-
-        .stat-label {
-            font-size: 0.95rem;
-            color: var(--text-light);
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .stat-trend {
-            display: flex;
-            align-items: center;
-            gap: var(--space-xs);
-            font-size: 0.85rem;
-            margin-top: var(--space-sm);
-        }
-
-        .trend-up {
-            color: var(--success);
-        }
-
-        .trend-down {
-            color: var(--danger);
-        }
-
-        /* SECTION HEADERS */
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: var(--space-lg);
-        }
-
-        .section-title {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: var(--text-dark);
-        }
-
-        .section-title::before {
-            content: '';
-            display: inline-block;
-            width: 6px;
-            height: 28px;
-            background: linear-gradient(180deg, var(--primary-orange), var(--deep-orange));
-            border-radius: 3px;
-            margin-right: var(--space-sm);
-            vertical-align: middle;
-        }
-
-        /* MODERN CARD GRID */
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: var(--space-lg);
-            margin-bottom: var(--space-xl);
-        }
-
-        .info-card {
-            background: var(--card-white);
-            border-radius: var(--radius-lg);
-            padding: var(--space-lg);
-            box-shadow: var(--shadow-sm);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .info-card::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary-orange), var(--deep-orange));
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.3s ease;
-        }
-
-        .info-card:hover::after {
-            transform: scaleX(1);
-        }
-
-        .info-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .card-icon-container {
-            width: 50px;
-            height: 50px;
-            border-radius: var(--radius-sm);
-            background: rgba(255, 107, 53, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: var(--space-md);
-            font-size: 1.5rem;
-            color: var(--primary-orange);
-        }
-
-        .card-value {
-            font-size: 2.25rem;
-            font-weight: 700;
-            color: var(--primary-orange);
-            margin-bottom: var(--space-xs);
-        }
-
-        .card-label {
-            font-size: 0.9rem;
-            color: var(--text-light);
-            font-weight: 500;
-        }
-
-        /* WIDE CARDS FOR CHARTS */
-        .chart-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-            gap: var(--space-lg);
-            margin-bottom: var(--space-xl);
-        }
-
-        .chart-card {
-            background: var(--card-white);
-            border-radius: var(--radius-lg);
-            padding: var(--space-lg);
-            box-shadow: var(--shadow-md);
-        }
-
-        .chart-card-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--text-dark);
-            margin-bottom: var(--space-md);
-        }
-
-        /* TABLES */
-        .table-card {
-            background: var(--card-white);
-            border-radius: var(--radius-lg);
-            padding: var(--space-lg);
-            box-shadow: var(--shadow-md);
-            margin-bottom: var(--space-xl);
-        }
-
-        .table-responsive {
-            overflow-x: auto;
-        }
-
-        .data-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0 8px;
-        }
-
-        .data-table thead th {
-            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(232, 93, 4, 0.05));
-            color: var(--primary-orange);
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            padding: var(--space-md);
-            text-align: left;
-        }
-
-        .data-table tbody tr {
-            background: var(--card-white);
-            transition: all 0.3s ease;
-        }
-
-        .data-table tbody tr:hover {
-            transform: scale(1.01);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .data-table tbody td {
-            padding: var(--space-md);
-            border-top: 1px solid var(--border-light);
-            border-bottom: 1px solid var(--border-light);
-        }
-
-        .data-table tbody td:first-child {
-            border-left: 1px solid var(--border-light);
-            border-radius: var(--radius-sm) 0 0 var(--radius-sm);
-        }
-
-        .data-table tbody td:last-child {
-            border-right: 1px solid var(--border-light);
-            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-        }
-
-        /* FILTER BAR */
-        .filter-bar {
-            display: flex;
-            gap: var(--space-md);
-            margin-bottom: var(--space-lg);
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        .search-box {
-            flex: 1;
-            min-width: 300px;
-            position: relative;
-        }
-
-        .search-box input {
-            width: 100%;
-            padding: var(--space-md) var(--space-md) var(--space-md) 3rem;
-            border: 2px solid var(--border-light);
-            border-radius: var(--radius-md);
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-        }
-
-        .search-box input:focus {
-            outline: none;
-            border-color: var(--primary-orange);
-            box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1);
-        }
-
-        .search-box i {
-            position: absolute;
-            left: var(--space-md);
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--primary-orange);
-            font-size: 1.2rem;
-        }
-
-        .filter-select {
-            padding: var(--space-md);
-            border: 2px solid var(--border-light);
-            border-radius: var(--radius-md);
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .filter-select:focus {
-            outline: none;
-            border-color: var(--primary-orange);
-        }
-
-        /* MODALS */
+        /* Password Protection Styles */
         .login-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, var(--primary-orange), var(--deep-orange), var(--secondary-orange));
+            background: linear-gradient(135deg, #A05252 0%, #8B4545 100%);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -565,474 +67,557 @@
 
         .login-box {
             background: white;
-            padding: 3rem 2.5rem;
-            border-radius: var(--radius-xl);
-            box-shadow: var(--shadow-xl);
-            max-width: 450px;
+            padding: 50px 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
             width: 90%;
             text-align: center;
         }
 
         .login-box h1 {
-            font-size: 2.5rem;
-            margin-bottom: var(--space-sm);
-            background: linear-gradient(135deg, var(--primary-orange), var(--deep-orange));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #A05252;
+            margin-bottom: 10px;
+            font-size: 2rem;
         }
 
         .login-box p {
-            color: var(--text-light);
-            margin-bottom: var(--space-xl);
-            font-size: 1rem;
+            color: #666;
+            margin-bottom: 30px;
         }
 
         .login-form {
             display: flex;
             flex-direction: column;
-            gap: var(--space-md);
+            gap: 20px;
         }
 
         .login-input {
-            padding: var(--space-md);
-            border: 2px solid var(--border-light);
-            border-radius: var(--radius-md);
-            font-family: 'Poppins', sans-serif;
-            font-size: 1rem;
-            transition: all 0.3s;
+            padding: 15px;
+            border: 2px solid #EAEAEA;
+            border-radius: 10px;
+            font-size: 16px;
+            font-family: 'Inter', sans-serif;
+            transition: border-color 0.3s;
         }
 
         .login-input:focus {
             outline: none;
-            border-color: var(--primary-orange);
-            box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1);
+            border-color: #A05252;
         }
 
         .login-button {
-            padding: var(--space-md);
-            background: linear-gradient(135deg, var(--primary-orange), var(--deep-orange));
+            padding: 15px;
+            background: #A05252;
             color: white;
             border: none;
-            border-radius: var(--radius-md);
-            font-family: 'Poppins', sans-serif;
-            font-size: 1rem;
+            border-radius: 10px;
+            font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: background 0.3s;
+            font-family: 'Inter', sans-serif;
         }
 
         .login-button:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
+            background: #8B4545;
         }
 
         .login-error {
-            color: var(--danger);
-            font-size: 0.9rem;
+            color: #dc3545;
+            font-size: 14px;
             display: none;
-            margin-top: -var(--space-sm);
+            margin-top: -10px;
         }
 
         .login-error.show {
             display: block;
         }
 
-        .modal {
-            display: none;
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: var(--card-bg);
+            padding: 24px;
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(8px);
-            z-index: 2000;
-            justify-content: center;
+            bottom: 0;
+            transition: background-color var(--transition-speed);
+            z-index: 50;
+        }
+
+        .sidebar h2 {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .nav-link {
+            display: flex;
             align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: var(--border-radius);
+            color: var(--text-color);
+            text-decoration: none;
+            transition: background-color var(--transition-speed), color var(--transition-speed);
         }
 
-        .modal-content {
-            background: var(--card-white);
-            border-radius: var(--radius-xl);
-            padding: var(--space-xl);
-            max-width: 800px;
-            width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-            box-shadow: var(--shadow-xl);
+        .nav-link:hover, .nav-link.active {
+            background-color: var(--primary-color);
+            color: #FFFFFF;
+        }
+        
+        .nav-link.active i, .nav-link:hover i {
+            color: #FFFFFF;
         }
 
-        .modal-header {
+        .nav-link i {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            transition: color var(--transition-speed);
+        }
+
+        .main-content {
+            flex-grow: 1;
+            padding: 32px;
+            margin-left: 250px;
+            transition: margin-left var(--transition-speed);
+        }
+
+        .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: var(--space-lg);
-            padding-bottom: var(--space-md);
-            border-bottom: 2px solid var(--border-light);
+            margin-bottom: 24px;
         }
 
-        .modal-header h3 {
-            font-size: 1.75rem;
-            color: var(--primary-orange);
-            font-weight: 700;
-        }
-
-        .close-modal {
-            width: 40px;
-            height: 40px;
-            border-radius: var(--radius-sm);
-            background: rgba(255, 107, 53, 0.1);
-            color: var(--primary-orange);
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .close-modal:hover {
-            background: var(--primary-orange);
-            color: white;
-            transform: rotate(90deg);
-        }
-
-        /* FORMS */
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: var(--space-md);
-        }
-
-        .form-group {
-            margin-bottom: var(--space-md);
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: var(--space-xs);
+        .header h1 {
+            font-size: 2rem;
             font-weight: 600;
-            color: var(--text-dark);
-            font-size: 0.9rem;
         }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: var(--space-md);
-            border: 2px solid var(--border-light);
-            border-radius: var(--radius-md);
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.95rem;
-            transition: all 0.3s;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--primary-orange);
-            box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1);
-        }
-
-        /* BUTTONS */
-        .btn {
-            padding: var(--space-md) var(--space-lg);
-            border-radius: var(--radius-md);
-            border: none;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: inline-flex;
+        
+        .header .controls {
+            display: flex;
+            gap: 16px;
             align-items: center;
-            gap: var(--space-xs);
+        }
+        
+        .toggle-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            transition: color var(--transition-speed);
+        }
+        
+        .toggle-button:hover {
+            color: var(--primary-color);
         }
 
-        .btn.primary {
-            background: linear-gradient(135deg, var(--primary-orange), var(--deep-orange));
+        .refresh-btn {
+            background: none;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .refresh-btn:hover {
+            background: var(--primary-color);
             color: white;
-            box-shadow: var(--shadow-sm);
         }
 
-        .btn.primary:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
+        .refresh-btn.loading {
+            opacity: 0.6;
+            pointer-events: none;
         }
 
-        .btn.secondary {
-            background: var(--border-light);
-            color: var(--primary-orange);
-        }
-
-        .btn.secondary:hover {
-            background: var(--primary-orange);
-            color: white;
-        }
-
-        /* BADGES */
-        .badge {
-            display: inline-block;
-            padding: 0.35rem 0.75rem;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        .badge-active {
-            background: rgba(16, 185, 129, 0.15);
-            color: var(--success);
-        }
-
-        .badge-inactive {
-            background: rgba(239, 68, 68, 0.15);
-            color: var(--danger);
-        }
-
-        /* ANIMATIONS */
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+        .refresh-btn.loading i {
+            animation: spin 1s linear infinite;
         }
 
         @keyframes spin {
+            from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .fade-in-up {
-            animation: fadeInUp 0.6s ease-out;
-        }
-
-        /* PAGE VISIBILITY */
         .page {
             display: none;
         }
 
         .page.active {
             display: block;
-            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
         }
 
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .top-navbar {
-                padding: 0 var(--space-md);
-                height: auto;
-                flex-wrap: wrap;
-                padding-top: var(--space-md);
-                padding-bottom: var(--space-md);
-            }
-
-            .nav-menu {
-                order: 3;
-                width: 100%;
-                margin-top: var(--space-md);
-                justify-content: space-around;
-            }
-
-            .nav-link span {
-                display: none;
-            }
-
-            .main-container {
-                padding: var(--space-md);
-            }
-
-            .page-title {
-                font-size: 1.75rem;
-            }
-
-            .hero-stats,
-            .card-grid,
-            .chart-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .chart-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* PROFILE PIC */
-        .profile-pic-container {
-            text-align: center;
-            margin: var(--space-lg) 0;
-        }
-
-        .profile-pic-preview {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid var(--primary-orange);
-            display: none;
-            margin: 0 auto var(--space-md);
-            box-shadow: var(--shadow-md);
-        }
-
-        /* TABLE ACTIONS */
-        .table-actions {
+        .card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 24px;
+            box-shadow: var(--box-shadow);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background-color var(--transition-speed);
             display: flex;
-            gap: var(--space-xs);
-        }
-
-        .table-actions button {
-            width: 36px;
-            height: 36px;
-            border-radius: var(--radius-sm);
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
+            text-align: left;
         }
 
-        .table-actions button:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .status-badge {
-            padding: 0.35rem 0.85rem;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            display: inline-block;
-        }
-
-        /* METRIC CARDS */
-        .metric-content {
-            flex: 1;
-        }
-
-        .metric-icon-container {
-            font-size: 2.5rem;
-            color: rgba(255, 107, 53, 0.2);
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
         }
 
         .clickable-card {
-            cursor: pointer;
             transition: all 0.3s ease;
         }
 
         .clickable-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
         }
 
         .clickable-card:active {
-            transform: translateY(-2px);
+            transform: translateY(-2px) scale(0.98);
+        }
+        
+        .metric-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
         }
 
-        .card {
-            background: var(--card-white);
-            border-radius: var(--radius-lg);
-            padding: var(--space-lg);
-            box-shadow: var(--shadow-sm);
-            transition: all 0.3s;
+        .card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 8px;
         }
 
-        .value {
+        .card .value {
             font-size: 2.5rem;
             font-weight: 700;
-            color: var(--primary-orange);
+            color: var(--primary-color);
             line-height: 1;
         }
 
-        /* TAB STYLES */
-        .tab-buttons {
-            display: flex;
-            gap: var(--space-sm);
-            margin-bottom: var(--space-lg);
-            border-bottom: 2px solid var(--border-light);
+        .card p {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            margin-top: 5px;
         }
 
+        .metric-icon-container {
+            font-size: 3.5rem;
+            color: var(--light-icon-color);
+            transition: color 0.3s;
+        }
+        .card:hover .metric-icon-container {
+            color: var(--border-color);
+        }
+        
+        .department-card {
+            cursor: pointer;
+            flex-direction: column;
+            min-height: 200px;
+        }
+        .department-card .metric-content {
+            align-items: flex-start;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 32px 0 16px;
+        }
+        
+        .section-header h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            transition: background-color var(--transition-speed);
+            margin-bottom: 20px;
+        }
+        
+        #report-output-content table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+        #report-output-content table th, #report-output-content table td {
+            padding: 8px 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        #report-output-content table th {
+            background-color: var(--background-color);
+            color: var(--secondary-color);
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .data-table th, .data-table td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .data-table th {
+            color: var(--secondary-color);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .data-table a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+         .data-table a:hover {
+            text-decoration: underline;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-transform: capitalize;
+        }
+        
+        .status-active { background-color: #D4EDDA; color: #155724; }
+        .status-inactive { background-color: #F8D7DA; color: #721C24; }
+        .status-onleave { background-color: #FFF3CD; color: #856404; }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            width: 90%;
+            max-width: 900px;
+            position: relative;
+            transition: background-color var(--transition-speed);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .close-button {
+            color: var(--secondary-color);
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: background-color var(--transition-speed);
+        }
+
+        .profile-pic-preview {
+            max-width: 100px;
+            max-height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-top: 10px;
+        }
+        
+        .tab-controls {
+            display: flex;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 20px;
+        }
         .tab-button {
-            padding: var(--space-md) var(--space-lg);
+            padding: 10px 15px;
+            cursor: pointer;
             border: none;
             background: none;
-            font-family: 'Poppins', sans-serif;
             font-weight: 600;
-            font-size: 0.95rem;
-            color: var(--text-light);
-            cursor: pointer;
-            border-bottom: 3px solid transparent;
-            margin-bottom: -2px;
-            transition: all 0.3s;
+            color: var(--secondary-color);
+            transition: color 0.3s;
         }
-
         .tab-button.active {
-            color: var(--primary-orange);
-            border-bottom-color: var(--primary-orange);
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            margin-bottom: -2px;
         }
-
         .tab-content {
             display: none;
+            padding: 10px 0;
         }
-
         .tab-content.active {
             display: block;
         }
 
-        /* DEPARTMENT GRID */
-        #department-grid {
+        .details-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: var(--space-md);
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            padding-top: 5px;
+            margin-bottom: 15px;
         }
-
-        /* ADDITIONAL STYLES */
+        
         .details-item {
-            margin-bottom: var(--space-md);
+            padding: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
         }
-
-        .details-item strong {
-            color: var(--text-dark);
-            display: block;
-            margin-bottom: var(--space-xs);
+        
+        .details-item h4 {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 2px;
+            color: var(--text-color);
         }
 
         .details-item p {
-            color: var(--text-light);
+            color: var(--secondary-color);
+            font-size: 0.95rem;
         }
 
         .action-buttons {
             display: flex;
-            gap: var(--space-sm);
-            margin-top: var(--space-lg);
+            gap: 8px;
+            justify-content: flex-end;
+            margin-top: 20px;
         }
-
-        .toggle-button {
-            width: 44px;
-            height: 44px;
-            border-radius: var(--radius-md);
-            border: 2px solid var(--border-light);
-            background: var(--card-white);
-            color: var(--primary-orange);
+        
+        .action-buttons button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
+        }
+        
+        .action-buttons .primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .action-buttons .secondary {
+            background-color: var(--border-color);
+            color: var(--text-color);
         }
 
-        .toggle-button:hover {
-            background: linear-gradient(135deg, var(--primary-orange), var(--deep-orange));
-            color: white;
-            border-color: transparent;
+        .table-actions {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .table-actions button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--secondary-color);
+            transition: color var(--transition-speed);
+        }
+
+        .table-actions button:hover {
+            color: var(--primary-color);
+        }
+        
+        .transaction-log-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                flex-direction: row;
+                justify-content: space-around;
+                padding: 12px;
+            }
+            .sidebar h2, .sidebar .nav-link span { display: none; }
+            .nav-link { flex-direction: column; gap: 4px; font-size: 0.8rem; }
+            .main-content { margin-left: 0; padding: 16px; }
+            .header { flex-direction: column; align-items: flex-start; gap: 16px; }
+            .card-grid { grid-template-columns: 1fr; }
+            .form-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -1041,7 +626,7 @@
     <div class="login-overlay" id="loginOverlay">
         <div class="login-box">
             <h1>🔐 HR Dashboard</h1>
-            <p>ANDAAZ-E-HUNAR</p>
+            <p>Research & Development Solutions</p>
             <form class="login-form" id="loginForm">
                 <input 
                     type="password" 
@@ -1062,758 +647,223 @@
         </div>
     </div>
 
-    <!-- Top Navigation Bar -->
-    <nav class="top-navbar">
-        <div class="navbar-brand">
-            <div class="brand-logo">
-                <i class="fas fa-users-cog"></i>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2><strong style="font-weight: 800;">RESEARCH & DEVELOPMENT SOLUTIONS</strong><br><br>HR Dashboard</h2>
+            <nav>
+                <a href="#dashboard" class="nav-link active" data-page="dashboard"><i class="fas fa-home"></i><span>Dashboard</span></a>
+                <a href="#employees" class="nav-link" data-page="employees"><i class="fas fa-users"></i><span>Employees</span></a>
+                <a href="#payroll" class="nav-link" data-page="payroll"><i class="fas fa-money-check-alt"></i><span>Payroll & Log</span></a>
+                <a href="#departments" class="nav-link" data-page="departments"><i class="fas fa-sitemap"></i><span>Departments</span></a>
+                <a href="#reports" class="nav-link" data-page="reports"><i class="fas fa-chart-line"></i><span>Reports</span></a>
+            </nav>
+            
+            <!-- Footer in Sidebar -->
+            <div style="margin-top: auto; padding-top: 24px; border-top: 1px solid var(--border-color); text-align: center; color: var(--secondary-color); font-size: 0.75rem; line-height: 1.4;">
+                Designed and made by<br>Finance Department - RADS
             </div>
-            <div class="brand-text">
-                <h1>ANDAAZ_EHUNAR</h1>
-                <p>Human Resources Dashboard</p>
-            </div>
-        </div>
+        </aside>
 
-        <div class="nav-menu">
-            <a href="#dashboard" class="nav-link active" data-page="dashboard">
-                <i class="fas fa-home"></i>
-                <span>Dashboard</span>
-            </a>
-            <a href="#employees" class="nav-link" data-page="employees">
-                <i class="fas fa-users"></i>
-                <span>Employees</span>
-            </a>
-            <a href="#payroll" class="nav-link" data-page="payroll">
-                <i class="fas fa-money-check-alt"></i>
-                <span>Payroll</span>
-            </a>
-            <a href="#departments" class="nav-link" data-page="departments">
-                <i class="fas fa-sitemap"></i>
-                <span>Departments</span>
-            </a>
-            <a href="#reports" class="nav-link" data-page="reports">
-                <i class="fas fa-chart-line"></i>
-                <span>Reports</span>
-            </a>
-        </div>
-
-        <div class="nav-controls">
-            <button id="refresh-data-btn" class="refresh-btn" onclick="loadDataFromGoogleSheets()">
-                <i class="fas fa-sync-alt"></i>
-                Refresh Data
-            </button>
-            <button id="theme-toggle" class="control-btn toggle-button">
-                <i class="fas fa-moon"></i>
-            </button>
-            <button class="control-btn" onclick="logout()" title="Logout">
-                <i class="fas fa-sign-out-alt"></i>
-            </button>
-        </div>
-    </nav>
-
-    <!-- Main Content -->
-    <main class="main-container">
-        <!-- Dashboard Page -->
-        <section id="dashboard" class="page active">
-            <div class="page-header">
-                <h1 class="page-title" id="page-title">Dashboard Overview</h1>
-                <p class="page-subtitle">Complete HR analytics at a glance</p>
-            </div>
-
-            <!-- Hero Stats -->
-            <div class="hero-stats">
-                <div class="stat-card clickable-card" onclick="showMetricDetails('total-employees')">
-                    <div class="stat-card-header">
-                        <div>
-                            <div class="stat-value" id="total-employees">0</div>
-                            <div class="stat-label">Total Employees</div>
-                        </div>
-                        <div class="stat-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="stat-card clickable-card" onclick="showMetricDetails('active-employees')">
-                    <div class="stat-card-header">
-                        <div>
-                            <div class="stat-value" id="active-employees">0</div>
-                            <div class="stat-label">Active Employees</div>
-                        </div>
-                        <div class="stat-icon">
-                            <i class="fas fa-user-check"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="stat-card clickable-card" onclick="showMetricDetails('total-payroll')">
-                    <div class="stat-card-header">
-                        <div>
-                            <div class="stat-value" id="total-payroll">PKR 0</div>
-                            <div class="stat-label">Monthly Payroll</div>
-                        </div>
-                        <div class="stat-icon">
-                            <i class="fas fa-coins"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="stat-card clickable-card" onclick="showMetricDetails('turnover-rate')">
-                    <div class="stat-card-header">
-                        <div>
-                            <div class="stat-value" id="turnover-rate">0%</div>
-                            <div class="stat-label">Turnover Rate</div>
-                        </div>
-                        <div class="stat-icon">
-                            <i class="fas fa-sync-alt"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Gender & Employment Metrics -->
-            <div class="section-header">
-                <h2 class="section-title">Workforce Analytics</h2>
-            </div>
-
-            <div class="card-grid">
-                <div class="info-card clickable-card" onclick="showMetricDetails('male-employees')">
-                    <div class="card-icon-container">
-                        <i class="fas fa-mars"></i>
-                    </div>
-                    <div class="card-value" id="male-employees">0</div>
-                    <div class="card-label">Male Employees</div>
-                </div>
-
-                <div class="info-card clickable-card" onclick="showMetricDetails('female-employees')">
-                    <div class="card-icon-container">
-                        <i class="fas fa-venus"></i>
-                    </div>
-                    <div class="card-value" id="female-employees">0</div>
-                    <div class="card-label">Female Employees</div>
-                </div>
-
-                <div class="info-card clickable-card" onclick="showMetricDetails('gender-ratio')">
-                    <div class="card-icon-container">
-                        <i class="fas fa-balance-scale"></i>
-                    </div>
-                    <div class="card-value" id="gender-ratio">0%</div>
-                    <div class="card-label">Female Ratio</div>
-                </div>
-
-                <div class="info-card clickable-card" onclick="showMetricDetails('avg-tenure')">
-                    <div class="card-icon-container">
-                        <i class="fas fa-calendar-alt"></i>
-                    </div>
-                    <div class="card-value" id="avg-tenure">0</div>
-                    <div class="card-label">Avg Tenure (Years)</div>
-                </div>
-            </div>
-
-            <!-- Employment Types -->
-            <div class="section-header">
-                <h2 class="section-title">Employment Distribution</h2>
-            </div>
-
-            <div class="card-grid">
-                <div class="info-card clickable-card" onclick="showMetricDetails('regular-employees')">
-                    <div class="card-icon-container">
-                        <i class="fas fa-id-card"></i>
-                    </div>
-                    <div class="card-value" id="regular-employees">0</div>
-                    <div class="card-label">Regular Employees</div>
-                </div>
-
-                <div class="info-card clickable-card" onclick="showMetricDetails('contractual-employees')">
-                    <div class="card-icon-container">
-                        <i class="fas fa-file-contract"></i>
-                    </div>
-                    <div class="card-value" id="contractual-employees">0</div>
-                    <div class="card-label">Contractual</div>
-                </div>
-
-                <div class="info-card clickable-card" onclick="showMetricDetails('project-employees')">
-                    <div class="card-icon-container">
-                        <i class="fas fa-project-diagram"></i>
-                    </div>
-                    <div class="card-value" id="project-employees">0</div>
-                    <div class="card-label">Project Based</div>
-                </div>
-            </div>
-
-            <!-- Recent Activity -->
-            <div class="section-header">
-                <h2 class="section-title">Recent Activity</h2>
-            </div>
-
-            <div class="card-grid">
-                <div class="info-card clickable-card" onclick="showMetricDetails('joiners-30days')">
-                    <div class="card-icon-container">
-                        <i class="fas fa-user-plus"></i>
-                    </div>
-                    <div class="card-value" id="joiners-30days">0</div>
-                    <div class="card-label">Joiners (30 Days)</div>
-                </div>
-
-                <div class="info-card clickable-card" onclick="showMetricDetails('leavers-30days')">
-                    <div class="card-icon-container">
-                        <i class="fas fa-user-minus"></i>
-                    </div>
-                    <div class="card-value" id="leavers-30days">0</div>
-                    <div class="card-label">Leavers (30 Days)</div>
-                </div>
-
-                <div class="info-card clickable-card" onclick="showMetricDetails('joiners-90days')">
-                    <div class="card-icon-container">
-                        <i class="fas fa-user-plus"></i>
-                    </div>
-                    <div class="card-value" id="joiners-90days">0</div>
-                    <div class="card-label">Joiners (90 Days)</div>
-                </div>
-
-                <div class="info-card clickable-card" onclick="showMetricDetails('leavers-90days')">
-                    <div class="card-icon-container">
-                        <i class="fas fa-user-minus"></i>
-                    </div>
-                    <div class="card-value" id="leavers-90days">0</div>
-                    <div class="card-label">Leavers (90 Days)</div>
-                </div>
-            </div>
-
-            <!-- Status Analytics -->
-            <div class="section-header">
-                <h2 class="section-title">Current Status</h2>
-            </div>
-
-            <div class="card-grid">
-                <div class="info-card clickable-card" onclick="showMetricDetails('employees-present')">
-                    <div class="card-icon-container">
-                        <i class="fas fa-user-check"></i>
-                    </div>
-                    <div class="card-value" id="employees-present">0</div>
-                    <div class="card-label">Present</div>
-                </div>
-
-                <div class="info-card clickable-card" onclick="showMetricDetails('employees-wfh')">
-                    <div class="card-icon-container">
-                        <i class="fas fa-home"></i>
-                    </div>
-                    <div class="card-value" id="employees-wfh">0</div>
-                    <div class="card-label">Work From Home</div>
-                </div>
-
-                <div class="info-card clickable-card" onclick="showMetricDetails('employees-annual-leave')">
-                    <div class="card-icon-container">
-                        <i class="fas fa-umbrella-beach"></i>
-                    </div>
-                    <div class="card-value" id="employees-annual-leave">0</div>
-                    <div class="card-label">Annual Leave</div>
-                </div>
-
-                <div class="info-card clickable-card" onclick="showMetricDetails('employees-short-leave')">
-                    <div class="card-icon-container">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <div class="card-value" id="employees-short-leave">0</div>
-                    <div class="card-label">Short Leave</div>
-                </div>
-
-                <div class="info-card clickable-card" onclick="showMetricDetails('employees-on-leave')">
-                    <div class="card-icon-container">
-                        <i class="fas fa-calendar-times"></i>
-                    </div>
-                    <div class="card-value" id="employees-on-leave">0</div>
-                    <div class="card-label">On Leave (Other)</div>
-                </div>
-
-                <div class="info-card clickable-card" onclick="showMetricDetails('employees-inactive')">
-                    <div class="card-icon-container">
-                        <i class="fas fa-user-slash"></i>
-                    </div>
-                    <div class="card-value" id="employees-inactive">0</div>
-                    <div class="card-label">Inactive</div>
-                </div>
-            </div>
-
-            <!-- Department Analytics Charts -->
-            <div class="section-header">
-                <h2 class="section-title">Department Analytics</h2>
-            </div>
-
-            <div class="chart-grid">
-                <div class="chart-card">
-                    <h3 class="chart-card-title">Gender Distribution by Department</h3>
-                    <div id="gender-by-dept-chart"></div>
-                </div>
-
-                <div class="chart-card">
-                    <h3 class="chart-card-title">Employee Type Distribution</h3>
-                    <div id="employment-type-chart"></div>
-                </div>
-
-                <div class="chart-card">
-                    <h3 class="chart-card-title">Top 5 Departments by Headcount</h3>
-                    <div id="dept-headcount-chart"></div>
-                </div>
-
-                <div class="chart-card">
-                    <h3 class="chart-card-title">Average Salary by Department</h3>
-                    <div id="dept-salary-chart"></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Employees Page -->
-        <section id="employees" class="page">
-            <div class="page-header">
-                <h1 class="page-title">Employee Directory</h1>
-                <p class="page-subtitle">Manage your workforce</p>
-            </div>
-
-            <div class="table-card">
-                <div class="filter-bar">
-                    <div class="search-box">
-                        <i class="fas fa-search"></i>
-                        <input type="text" id="employee-search" placeholder="Search employees by name, ID, or department...">
-                    </div>
-                    <select class="filter-select" id="gender-filter">
-                        <option value="">All Genders</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                    </select>
-                    <select class="filter-select" id="department-filter">
-                        <option value="">All Departments</option>
-                    </select>
-                    <select class="filter-select" id="status-filter">
-                        <option value="">All Status</option>
-                        <option value="Active">Active</option>
-                        <option value="Inactive">Inactive</option>
-                    </select>
-                </div>
-
-                <div class="table-responsive">
-                    <table class="data-table" id="employees-table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Gender</th>
-                                <th>Department</th>
-                                <th>Position</th>
-                                <th>Status</th>
-                                <th>Date of Joining</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <!-- Payroll Page -->
-        <section id="payroll" class="page">
-            <div class="page-header">
-                <h1 class="page-title">Payroll & Transaction Log</h1>
-                <p class="page-subtitle">Salary details and transaction history</p>
-            </div>
-
-            <!-- Payroll Summary -->
-            <div class="hero-stats" style="margin-bottom: var(--space-xl);">
-                <div class="stat-card">
-                    <div class="stat-card-header">
-                        <div>
-                            <div class="stat-value" id="payroll-total-base">PKR 0</div>
-                            <div class="stat-label">Total Base Salary</div>
-                        </div>
-                        <div class="stat-icon">
-                            <i class="fas fa-dollar-sign"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-card-header">
-                        <div>
-                            <div class="stat-value" id="payroll-total-allowances">PKR 0</div>
-                            <div class="stat-label">Total Allowances</div>
-                        </div>
-                        <div class="stat-icon">
-                            <i class="fas fa-hand-holding-usd"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-card-header">
-                        <div>
-                            <div class="stat-value" id="payroll-total-benefits">PKR 0</div>
-                            <div class="stat-label">Total Benefits</div>
-                        </div>
-                        <div class="stat-icon">
-                            <i class="fas fa-gift"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-card-header">
-                        <div>
-                            <div class="stat-value" id="payroll-total-ctc">PKR 0</div>
-                            <div class="stat-label">Total CTC</div>
-                        </div>
-                        <div class="stat-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Payroll Table -->
-            <div class="table-card">
-                <h3 style="margin-bottom: var(--space-lg); font-size: 1.5rem; font-weight: 700;">Employee Salaries</h3>
-                <div class="table-responsive">
-                    <table class="data-table" id="payroll-table">
-                        <thead>
-                            <tr>
-                                <th>Employee</th>
-                                <th>Base Salary</th>
-                                <th>Allowances</th>
-                                <th>Benefits</th>
-                                <th>Total CTC</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Recent Hires -->
-            <div class="table-card" style="margin-top: var(--space-xl);">
-                <h3 style="margin-bottom: var(--space-lg); font-size: 1.5rem; font-weight: 700;">Recent Hires</h3>
-                <div class="table-responsive">
-                    <table class="data-table" id="recent-hires-table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Department</th>
-                                <th>Position</th>
-                                <th>Date of Joining</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Transaction Log -->
-            <div class="table-card" style="margin-top: var(--space-xl);">
-                <h3 style="margin-bottom: var(--space-lg); font-size: 1.5rem; font-weight: 700;">Transaction Log</h3>
-                <div class="table-responsive">
-                    <table class="data-table" id="transaction-table">
-                        <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Employee</th>
-                                <th>Transaction Type</th>
-                                <th>Details</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <!-- Departments Page -->
-        <section id="departments" class="page">
-            <div class="page-header">
-                <h1 class="page-title">Departments</h1>
-                <p class="page-subtitle">Organizational structure and team distribution</p>
-            </div>
-
-            <div id="department-grid"></div>
-        </section>
-
-        <!-- Reports Page -->
-        <section id="reports" class="page">
-            <div class="page-header">
-                <h1 class="page-title">Reports & Analytics</h1>
-                <p class="page-subtitle">Generate custom reports</p>
-            </div>
-
-            <div class="table-card">
-                <form id="report-form">
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label>Department</label>
-                            <select id="report-department" class="filter-select" style="width: 100%; padding: var(--space-md);">
-                                <option value="">All Departments</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>&nbsp;</label>
-                            <button type="submit" class="btn primary" style="width: 100%;">
-                                <i class="fas fa-file-alt"></i> Generate Report
-                            </button>
-                        </div>
-                    </div>
-                </form>
-
-                <div style="margin-top: var(--space-xl);">
-                    <button id="download-report-btn" class="btn primary" style="display: none;">
-                        <i class="fas fa-download"></i> Download Report
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="header">
+                <h1 id="page-title">Dashboard</h1>
+                <div class="controls">
+                    <button id="refresh-data-btn" class="refresh-btn" onclick="loadDataFromGoogleSheets()">
+                        <i class="fas fa-sync-alt"></i>
+                        Refresh
+                    </button>
+                    <button id="theme-toggle" class="toggle-button"><i class="fas fa-moon"></i></button>
+                    <button class="toggle-button" onclick="logout()" title="Logout">
+                        <i class="fas fa-sign-out-alt"></i>
                     </button>
                 </div>
+            </header>
 
-                <div id="report-output-content" style="margin-top: var(--space-lg);"></div>
-            </div>
-        </section>
-    </main>
+            <!-- Page Sections -->
+            <section id="dashboard" class="page active">
+                <h2 style="margin-bottom: 16px; font-size: 1.3rem; color: var(--secondary-color);">Overview Metrics</h2>
+                <div class="card-grid">
+                    <div class="card clickable-card" onclick="showMetricDetails('total-employees')"><div class="metric-content"><div class="value" id="total-employees">0</div><p>Total Employees</p></div><div class="metric-icon-container"><i class="fas fa-users"></i></div></div>
+                    <div class="card clickable-card" onclick="showMetricDetails('active-employees')"><div class="metric-content"><div class="value" id="active-employees">0</div><p>Active Employees</p></div><div class="metric-icon-container"><i class="fas fa-user-check"></i></div></div>
+                    <div class="card clickable-card" onclick="showMetricDetails('male-employees')"><div class="metric-content"><div class="value" id="male-employees">0</div><p>Male Employees</p></div><div class="metric-icon-container"><i class="fas fa-mars"></i></div></div>
+                    <div class="card clickable-card" onclick="showMetricDetails('female-employees')"><div class="metric-content"><div class="value" id="female-employees">0</div><p>Female Employees</p></div><div class="metric-icon-container"><i class="fas fa-venus"></i></div></div>
+                    <div class="card clickable-card" onclick="showMetricDetails('gender-ratio')"><div class="metric-content"><div class="value" id="gender-ratio">0%</div><p>Female Ratio</p></div><div class="metric-icon-container"><i class="fas fa-balance-scale"></i></div></div>
+                    <div class="card clickable-card" onclick="showMetricDetails('avg-tenure')"><div class="metric-content"><div class="value" id="avg-tenure">0</div><p>Avg Tenure (Years)</p></div><div class="metric-icon-container"><i class="fas fa-calendar-alt"></i></div></div>
+                </div>
+
+                <h2 style="margin: 24px 0 16px 0; font-size: 1.3rem; color: var(--secondary-color);">Financial Metrics</h2>
+                <div class="card-grid">
+                    <div class="card clickable-card" onclick="showMetricDetails('total-payroll')"><div class="metric-content"><div class="value" id="total-payroll">PKR 0</div><p>Total Monthly Payroll</p></div><div class="metric-icon-container"><i class="fas fa-coins"></i></div></div>
+                    <div class="card clickable-card" onclick="showMetricDetails('employment-types')" style="flex-direction: column; align-items: flex-start;">
+                        <div style="display: flex; justify-content: space-between; width: 100%; margin-bottom: 12px;">
+                            <h3 style="font-size: 0.9rem; color: var(--secondary-color); text-transform: uppercase; letter-spacing: 0.5px;">Employment Types</h3>
+                            <div class="metric-icon-container" style="font-size: 2rem;"><i class="fas fa-users-cog"></i></div>
+                        </div>
+                        <div style="display: flex; gap: 24px; width: 100%;">
+                            <div>
+                                <div class="value" id="regular-employees" style="font-size: 2rem; color: var(--primary-color);">0</div>
+                                <p style="font-size: 0.85rem; color: var(--secondary-color);">Regular</p>
+                            </div>
+                            <div>
+                                <div class="value" id="contractual-employees" style="font-size: 2rem; color: var(--primary-color);">0</div>
+                                <p style="font-size: 0.85rem; color: var(--secondary-color);">Contractual</p>
+                            </div>
+                            <div>
+                                <div class="value" id="project-employees" style="font-size: 2rem; color: var(--primary-color);">0</div>
+                                <p style="font-size: 0.85rem; color: var(--secondary-color);">Project</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card clickable-card" onclick="showMetricDetails('turnover-rate')"><div class="metric-content"><div class="value" id="turnover-rate">0%</div><p>Annual Turnover Rate</p></div><div class="metric-icon-container"><i class="fas fa-sync-alt"></i></div></div>
+                </div>
+
+                <h2 style="margin: 24px 0 16px 0; font-size: 1.3rem; color: var(--secondary-color);">Recent Activity</h2>
+                <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
+                    <div class="card clickable-card" onclick="showMetricDetails('joiners-30days')"><div class="metric-content"><div class="value" id="joiners-30days">0</div><p>Joiners (Last 31 Days)</p></div><div class="metric-icon-container"><i class="fas fa-user-plus"></i></div></div>
+                    <div class="card clickable-card" onclick="showMetricDetails('leavers-30days')"><div class="metric-content"><div class="value" id="leavers-30days">0</div><p>Leavers (Last 31 Days)</p></div><div class="metric-icon-container"><i class="fas fa-user-minus"></i></div></div>
+                    <div class="card clickable-card" onclick="showMetricDetails('joiners-90days')"><div class="metric-content"><div class="value" id="joiners-90days">0</div><p>Joiners (Last 90 Days)</p></div><div class="metric-icon-container"><i class="fas fa-user-plus"></i></div></div>
+                    <div class="card clickable-card" onclick="showMetricDetails('leavers-90days')"><div class="metric-content"><div class="value" id="leavers-90days">0</div><p>Leavers (Last 90 Days)</p></div><div class="metric-icon-container"><i class="fas fa-user-minus"></i></div></div>
+                </div>
+
+                <h2 style="margin: 24px 0 16px 0; font-size: 1.3rem; color: var(--secondary-color);">Status Analytics</h2>
+                <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
+                    <div class="card clickable-card" onclick="showMetricDetails('employees-present')"><div class="metric-content"><div class="value" id="employees-present">0</div><p>Employees Present</p></div><div class="metric-icon-container"><i class="fas fa-user-check"></i></div></div>
+                    <div class="card clickable-card" onclick="showMetricDetails('employees-wfh')"><div class="metric-content"><div class="value" id="employees-wfh">0</div><p>Work From Home</p></div><div class="metric-icon-container"><i class="fas fa-home"></i></div></div>
+                    <div class="card clickable-card" onclick="showMetricDetails('employees-annual-leave')"><div class="metric-content"><div class="value" id="employees-annual-leave">0</div><p>Annual Leave</p></div><div class="metric-icon-container"><i class="fas fa-umbrella-beach"></i></div></div>
+                    <div class="card clickable-card" onclick="showMetricDetails('employees-short-leave')"><div class="metric-content"><div class="value" id="employees-short-leave">0</div><p>Short Leave</p></div><div class="metric-icon-container"><i class="fas fa-clock"></i></div></div>
+                    <div class="card clickable-card" onclick="showMetricDetails('employees-on-leave')"><div class="metric-content"><div class="value" id="employees-on-leave">0</div><p>On Leave (Other)</p></div><div class="metric-icon-container"><i class="fas fa-calendar-times"></i></div></div>
+                    <div class="card clickable-card" onclick="showMetricDetails('employees-inactive')"><div class="metric-content"><div class="value" id="employees-inactive">0</div><p>Inactive</p></div><div class="metric-icon-container"><i class="fas fa-user-slash"></i></div></div>
+                </div>
+
+                <h2 style="margin: 24px 0 16px 0; font-size: 1.3rem; color: var(--secondary-color);">Department Analytics</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); gap: 24px; margin-bottom: 24px;">
+                    <div class="card" style="flex-direction: column; align-items: flex-start; padding: 24px;">
+                        <h3 style="margin-bottom: 16px; font-size: 1.1rem;">Gender Distribution by Department</h3>
+                        <div id="gender-by-dept-chart" style="width: 100%;"></div>
+                    </div>
+                    <div class="card" style="flex-direction: column; align-items: flex-start; padding: 24px;">
+                        <h3 style="margin-bottom: 16px; font-size: 1.1rem;">Employee Type Distribution</h3>
+                        <div id="employment-type-chart" style="width: 100%;"></div>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); gap: 24px; margin-bottom: 24px;">
+                    <div class="card" style="flex-direction: column; align-items: flex-start; padding: 24px;">
+                        <h3 style="margin-bottom: 16px; font-size: 1.1rem;">Top 5 Departments by Headcount</h3>
+                        <div id="dept-headcount-chart" style="width: 100%;"></div>
+                    </div>
+                    <div class="card" style="flex-direction: column; align-items: flex-start; padding: 24px;">
+                        <h3 style="margin-bottom: 16px; font-size: 1.1rem;">Avg Salary by Department</h3>
+                        <div id="dept-salary-chart" style="width: 100%;"></div>
+                    </div>
+                </div>
+
+                <div class="section-header"><h2>Recent Hires</h2><a href="#employees" class="nav-link small">View All</a></div>
+                <div class="table-responsive"><table class="data-table" id="recent-hires-table"><thead><tr><th>Name</th><th>Department</th><th>Position</th><th>Status</th></tr></thead><tbody></tbody></table></div>
+            </section>
+
+            <section id="employees" class="page">
+                <div class="section-header">
+                    <h2>All Employees</h2>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <input type="text" id="employee-search" placeholder="Search employees..." style="padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border-color);">
+                        <button onclick="clearAllFilters()" class="action-buttons secondary" style="padding: 8px 16px; white-space: nowrap;">
+                            <i class="fas fa-times-circle"></i> Clear Filters
+                        </button>
+                    </div>
+                </div>
+                <div class="filter-group" style="display: flex; gap: 10px; margin-bottom: 20px;"><select id="gender-filter" style="padding: 8px;"><option value="">All Genders</option><option value="Male">Male</option><option value="Female">Female</option></select><select id="department-filter" style="padding: 8px;"><option value="">All Departments</option></select><select id="status-filter" style="padding: 8px;"><option value="">All Statuses</option><option value="Active">Active</option><option value="WFH">Work From Home</option><option value="Annual Leave">Annual Leave</option><option value="Short Leave">Short Leave</option><option value="On Leave">On Leave (Other)</option><option value="Inactive">Inactive</option></select></div>
+                
+                <div class="card-grid" style="margin-bottom: 24px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                    <div class="card clickable-card" onclick="filterByStatus('Active')" style="cursor: pointer; border: 2px solid #28a745;">
+                        <div class="metric-content"><div class="value" id="active-count-filter">0</div><p>Active</p></div>
+                        <div class="metric-icon-container"><i class="fas fa-user-check" style="color: #28a745;"></i></div>
+                    </div>
+                    <div class="card clickable-card" onclick="filterByStatus('WFH')" style="cursor: pointer; border: 2px solid #17a2b8;">
+                        <div class="metric-content"><div class="value" id="wfh-count-filter">0</div><p>Work From Home</p></div>
+                        <div class="metric-icon-container"><i class="fas fa-home" style="color: #17a2b8;"></i></div>
+                    </div>
+                    <div class="card clickable-card" onclick="filterByStatus('Annual Leave')" style="cursor: pointer; border: 2px solid #fd7e14;">
+                        <div class="metric-content"><div class="value" id="annual-leave-count-filter">0</div><p>Annual Leave</p></div>
+                        <div class="metric-icon-container"><i class="fas fa-umbrella-beach" style="color: #fd7e14;"></i></div>
+                    </div>
+                    <div class="card clickable-card" onclick="filterByStatus('Short Leave')" style="cursor: pointer; border: 2px solid #ffc107;">
+                        <div class="metric-content"><div class="value" id="short-leave-count-filter">0</div><p>Short Leave</p></div>
+                        <div class="metric-icon-container"><i class="fas fa-clock" style="color: #ffc107;"></i></div>
+                    </div>
+                    <div class="card clickable-card" onclick="filterByStatus('Inactive')" style="cursor: pointer; border: 2px solid #dc3545;">
+                        <div class="metric-content"><div class="value" id="inactive-count-filter">0</div><p>Inactive</p></div>
+                        <div class="metric-icon-container"><i class="fas fa-user-slash" style="color: #dc3545;"></i></div>
+                    </div>
+                </div>
+                
+                <div class="table-responsive"><table class="data-table" id="employees-table"><thead><tr><th>Name</th><th>Department</th><th>Position</th><th>Status</th><th>Actions</th></tr></thead><tbody></tbody></table></div>
+            </section>
+
+            <section id="payroll" class="page">
+                <div class="section-header"><h2>HR Transaction Log</h2><div class="transaction-log-header"><button onclick="openTransactionModal()" class="action-buttons primary" style="display: flex; align-items: center; gap: 8px;"><i class="fas fa-plus"></i> New Transaction</button><button class="action-buttons secondary" id="download-transaction-log-btn" style="display: flex; align-items: center; gap: 8px;" onclick="downloadTransactionLog()"><i class="fas fa-download"></i> Download Log</button></div></div>
+                <div class="table-responsive"><table class="data-table" id="transaction-table"><thead><tr><th>Date</th><th>Type</th><th>Employee ID</th><th>Details</th></tr></thead><tbody></tbody></table></div>
+                <div class="section-header"><h2>Monthly Payroll Summary</h2></div>
+                
+                <!-- Payroll Summary Card -->
+                <div class="card" style="margin-bottom: 24px; flex-direction: column; align-items: flex-start;">
+                    <h3 style="margin-bottom: 16px; color: var(--primary-color);">Total Monthly Cost Breakdown</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; width: 100%;">
+                        <div>
+                            <p style="color: var(--secondary-color); font-size: 0.85rem; margin-bottom: 4px;">Total Base Salary</p>
+                            <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary-color);" id="payroll-total-base">PKR 0</div>
+                        </div>
+                        <div>
+                            <p style="color: var(--secondary-color); font-size: 0.85rem; margin-bottom: 4px;">Total Allowances</p>
+                            <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary-color);" id="payroll-total-allowances">PKR 0</div>
+                        </div>
+                        <div>
+                            <p style="color: var(--secondary-color); font-size: 0.85rem; margin-bottom: 4px;">Total PF + EOBI</p>
+                            <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary-color);" id="payroll-total-benefits">PKR 0</div>
+                        </div>
+                        <div>
+                            <p style="color: var(--secondary-color); font-size: 0.85rem; margin-bottom: 4px;">Total Cost to Company</p>
+                            <div style="font-size: 1.8rem; font-weight: 700; color: var(--primary-color);" id="payroll-total-ctc">PKR 0</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="table-responsive"><table class="data-table" id="payroll-table"><thead><tr><th>Name</th><th>Department</th><th>Base Salary</th><th>Travel Allowance</th><th>Fuel/Grocery Allowance</th><th>Other Allowance</th><th>Provident Fund</th><th>EOBI</th><th>Total Cost to Company</th><th>Actions</th></tr></thead><tbody></tbody></table></div>
+            </section>
+
+            <section id="departments" class="page"><div class="section-header"><h2>Departments</h2></div><div class="card-grid" id="department-grid"></div></section>
+
+            <section id="reports" class="page">
+                <div class="section-header"><h2>Reports & Analytics</h2></div>
+                <div class="card" style="flex-direction: column; align-items: flex-start;">
+                    <h3>Generate Custom Report</h3>
+                    <form id="report-form" style="width: 100%;"><div class="form-grid"><div class="form-group"><label for="report-type">Report Type</label><select id="report-type" name="reportType" required><option value="">Select Report Type...</option><optgroup label="Employee Reports"><option value="joining">New Joinings Report</option><option value="leaving">Leaving/Termination Report</option><option value="contact">Complete Employee Directory</option><option value="employee-status">Employee Status Analysis</option><option value="tenure-analysis">Employee Tenure Analysis</option></optgroup><optgroup label="Financial Reports"><option value="payroll">Detailed Payroll Report</option><option value="department-salary">Department-wise Salary Breakdown</option><option value="salary-distribution">Salary Range Distribution</option><option value="allowances-breakdown">Allowances & Benefits Breakdown</option><option value="cost-center-analysis">Cost Center Analysis</option></optgroup><optgroup label="Analytical Reports"><option value="gender-analytics">Gender Distribution Analytics</option><option value="turnover-analysis">Turnover & Retention Analysis</option><option value="headcount-trends">Headcount Trends Report</option><option value="department-comparison">Department Performance Comparison</option><option value="work-mode-analysis">Work Mode & Leave Analysis</option><option value="recruitment-efficiency">Recruitment Efficiency Report</option></optgroup><optgroup label="Compliance Reports"><option value="provident-fund">Provident Fund Report</option><option value="eobi-report">EOBI Contribution Report</option><option value="tax-summary">Tax Deduction Summary</option></optgroup></select></div><div class="form-group"><label for="report-start-date">Start Date (Optional)</label><input type="date" id="report-start-date" name="startDate"></div><div class="form-group"><label for="report-end-date">End Date (Optional)</label><input type="date" id="report-end-date" name="endDate"></div><div class="form-group"><label for="report-department">Department Filter</label><select id="report-department" name="department"><option value="">All Departments</option></select></div><div class="form-group"><label for="report-status">Status Filter</label><select id="report-status" name="status"><option value="">All Statuses</option><option value="Active">Active Only</option><option value="Inactive">Inactive Only</option><option value="WFH">WFH Only</option><option value="On Leave">On Leave</option></select></div><div class="form-group"><label for="report-gender">Gender Filter</label><select id="report-gender" name="gender"><option value="">All</option><option value="Male">Male</option><option value="Female">Female</option></select></div></div><button type="submit" style="margin-top: 10px;">Generate Report</button></form>
+                </div>
+                <div class="card" style="margin-top: 20px; flex-direction: column; align-items: flex-start;"><div style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 10px;"><h3>Report Output & Analytics</h3><button class="action-buttons primary" id="download-report-btn" style="display: none; padding: 6px 12px;" onclick="downloadReport()"><i class="fas fa-download"></i> Download CSV</button></div><div id="report-output-content" style="width: 100%; min-height: 100px;"><p style="color: var(--secondary-color);">Select a report type and click "Generate Report" to view detailed analytics.</p></div></div>
+            </section>
+        </main>
+    </div>
 
     <!-- Employee Modal -->
-    <div id="employee-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Employee Details</h3>
-                <button class="close-modal" onclick="document.getElementById('employee-modal').style.display='none'">&times;</button>
-            </div>
-
-            <form id="employee-form">
-                <input type="hidden" id="employee-index">
-                
-                <div class="profile-pic-container">
-                    <img id="profile-pic-preview" class="profile-pic-preview" alt="Profile">
-                    <input type="file" id="employee-profile-pic" accept="image/*" style="display: none;">
-                    <button type="button" class="btn secondary" onclick="document.getElementById('employee-profile-pic').click()">
-                        <i class="fas fa-camera"></i> Upload Photo
-                    </button>
-                </div>
-
-                <div class="tab-buttons">
-                    <button type="button" class="tab-button active" data-tab="personal">Personal Info</button>
-                    <button type="button" class="tab-button" data-tab="employment">Employment</button>
-                </div>
-
-                <div class="tab-content active" id="tab-personal">
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label>Employee ID</label>
-                            <input type="text" name="ID">
-                        </div>
-                        <div class="form-group">
-                            <label>Full Name</label>
-                            <input type="text" name="Name">
-                        </div>
-                        <div class="form-group">
-                            <label>Father's Name</label>
-                            <input type="text" name="Father Name">
-                        </div>
-                        <div class="form-group">
-                            <label>CNIC</label>
-                            <input type="text" name="CNIC">
-                        </div>
-                        <div class="form-group">
-                            <label>Mobile</label>
-                            <input type="tel" name="Mobile">
-                        </div>
-                        <div class="form-group">
-                            <label>Email</label>
-                            <input type="email" name="Email">
-                        </div>
-                        <div class="form-group">
-                            <label>Date of Birth</label>
-                            <input type="date" name="DOB" id="employee-doj">
-                        </div>
-                        <div class="form-group">
-                            <label>Gender</label>
-                            <select name="Gender">
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tab-content" id="tab-employment">
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label>Department</label>
-                            <input type="text" name="Department">
-                        </div>
-                        <div class="form-group">
-                            <label>Position</label>
-                            <input type="text" name="Position">
-                        </div>
-                        <div class="form-group">
-                            <label>Employment Type</label>
-                            <select name="Employment Type">
-                                <option value="Regular">Regular</option>
-                                <option value="Contractual">Contractual</option>
-                                <option value="Project">Project</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Date of Joining</label>
-                            <input type="date" name="Joining Date">
-                        </div>
-                        <div class="form-group">
-                            <label>Status</label>
-                            <select name="Status">
-                                <option value="Active">Active</option>
-                                <option value="Inactive">Inactive</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Today's Status</label>
-                            <select name="Today's Status">
-                                <option value="Present">Present</option>
-                                <option value="WFH">Work From Home</option>
-                                <option value="Annual Leave">Annual Leave</option>
-                                <option value="Short Leave">Short Leave</option>
-                                <option value="On Leave">On Leave</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="action-buttons">
-                    <button type="submit" class="btn primary">
-                        <i class="fas fa-save"></i> Save
-                    </button>
-                    <button type="button" class="btn secondary" onclick="document.getElementById('employee-modal').style.display='none'">
-                        Cancel
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
+    <div id="employee-modal" class="modal"><div class="modal-content"><span class="close-button" onclick="closeEmployeeModal()">&times;</span><h3 style="margin-bottom: 15px;">Add/Edit Employee Details</h3><div class="tab-controls"><button class="tab-button active" data-tab="personal">Personal & Contact</button><button class="tab-button" data-tab="employment">Employment</button><button class="tab-button" data-tab="compensation">Compensation</button></div><form id="employee-form"><input type="hidden" id="employee-index" name="index"><div id="tab-personal" class="tab-content active"><div class="form-grid"><div class="form-group"><label for="employee-name">Name</label><input type="text" id="employee-name" name="Name" required></div><div class="form-group"><label for="employee-id">ID</label><input type="text" id="employee-id" name="ID" required></div><div class="form-group"><label for="employee-gender">Gender</label><select id="employee-gender" name="Gender" required><option value="Male">Male</option><option value="Female">Female</option><option value="Other">Other</option></select></div><div class="form-group"><label for="employee-contact">Contact Number</label><input type="text" id="employee-contact" name="Contact Number"></div><div class="form-group"><label for="employee-address">Address</label><textarea id="employee-address" name="Address" rows="1"></textarea></div><div class="form-group"><label for="employee-profile-pic">Profile Picture</label><input type="file" id="employee-profile-pic" accept="image/*"><img id="profile-pic-preview" class="profile-pic-preview" style="display: none;" alt="Profile Preview"></div><div class="form-group"><label for="employee-emergency-name">Emergency Name</label><input type="text" id="employee-emergency-name" name="Emergency Name"></div><div class="form-group"><label for="employee-emergency-rel">Emergency Relationship</label><input type="text" id="employee-emergency-rel" name="Emergency Relationship"></div><div class="form-group"><label for="employee-emergency-phone">Emergency Phone</label><input type="text" id="employee-emergency-phone" name="Emergency Phone"></div></div></div><div id="tab-employment" class="tab-content"><div class="form-grid"><div class="form-group"><label for="employee-dept">Department</label><input type="text" id="employee-dept" name="Department" required></div><div class="form-group"><label for="employee-pos">Position</label><input type="text" id="employee-pos" name="Position" required></div><div class="form-group"><label for="employee-emptype">Employment Type</label><input type="text" id="employee-emptype" name="Employment Type"></div><div class="form-group"><label for="employee-postype">Position Type</label><input type="text" id="employee-postype" name="Position Type"></div><div class="form-group"><label for="employee-supervisor">Supervisor</label><input type="text" id="employee-supervisor" name="Supervisor"></div><div class="form-group"><label for="employee-stationed">Stationed At</label><input type="text" id="employee-stationed" name="Stationed At"></div><div class="form-group"><label for="employee-fieldcity">Field Office City</label><input type="text" id="employee-fieldcity" name="Field Office City"></div><div class="form-group"><label for="employee-doj">Date of Joining</label><input type="date" id="employee-doj" name="Date of Joining" required></div><div class="form-group"><label for="employee-dol">Date of Leaving</label><input type="date" id="employee-dol" name="Date of Leaving"></div><div class="form-group"><label for="employee-status">Status</label><select id="employee-status" name="Status"><option value="Active">Active</option><option value="WFH">Work From Home (WFH)</option><option value="Annual Leave">Annual Leave</option><option value="Short Leave">Short Leave</option><option value="On Leave">On Leave (Other)</option><option value="Inactive">Inactive</option></select></div><div class="form-group"><label for="employee-termination-reason">Termination Reason</label><textarea id="employee-termination-reason" name="Termination Reason" rows="1"></textarea></div><div class="form-group"><label for="employee-skills">Skills</label><textarea id="employee-skills" name="Skills" rows="1"></textarea></div></div></div><div id="tab-compensation" class="tab-content"><div class="form-grid"><div class="form-group"><label for="employee-salary">Base Salary (PKR)</label><input type="number" id="employee-salary" name="Base Salary" required></div><div class="form-group"><label for="employee-travel">Travel Allowance (PKR)</label><input type="number" id="employee-travel" name="Travel Allowance"></div><div class="form-group"><label for="employee-fuel">Fuel/Grocery Allowance (PKR)</label><input type="number" id="employee-fuel" name="Fuel/Grocery Allowance"></div><div class="form-group"><label for="employee-other">Other Allowance (PKR)</label><input type="number" id="employee-other" name="Other Allowance"></div><div class="form-group"><label for="employee-pf">Provident Fund (PKR)</label><input type="number" id="employee-pf" name="Provident Fund"></div><div class="form-group"><label for="employee-eobi">EOBI (PKR)</label><input type="number" id="employee-eobi" name="EOBI"></div><div class="form-group"><label for="employee-cost-center">Cost Center</label><input type="text" id="employee-cost-center" name="Cost Center"></div></div></div><button type="submit" style="margin-top: 20px; width: 100%;">Save Employee</button></form></div></div>
 
     <!-- Payroll Modal -->
-    <div id="payroll-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Payroll Details</h3>
-                <button class="close-modal" onclick="document.getElementById('payroll-modal').style.display='none'">&times;</button>
-            </div>
-
-            <form id="payroll-form">
-                <input type="hidden" id="payroll-employee-index">
-                
-                <div class="form-group">
-                    <label>Employee Name</label>
-                    <input type="text" id="payroll-name" readonly style="background: var(--border-light);">
-                </div>
-
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label>Base Salary</label>
-                        <input type="number" id="payroll-salary">
-                    </div>
-                    <div class="form-group">
-                        <label>Travel Allowance</label>
-                        <input type="number" id="payroll-travel">
-                    </div>
-                    <div class="form-group">
-                        <label>Fuel/Grocery Allowance</label>
-                        <input type="number" id="payroll-fuel">
-                    </div>
-                    <div class="form-group">
-                        <label>Other Allowance</label>
-                        <input type="number" id="payroll-other">
-                    </div>
-                    <div class="form-group">
-                        <label>Provident Fund</label>
-                        <input type="number" id="payroll-pf">
-                    </div>
-                    <div class="form-group">
-                        <label>EOBI</label>
-                        <input type="number" id="payroll-eobi">
-                    </div>
-                </div>
-
-                <div style="background: var(--border-light); padding: var(--space-lg); border-radius: var(--radius-md); margin: var(--space-lg) 0;">
-                    <h4 style="margin-bottom: var(--space-sm);">Total CTC Preview</h4>
-                    <div style="font-size: 2rem; font-weight: 700; color: var(--primary-orange);" id="payroll-ctc-preview">PKR 0</div>
-                </div>
-
-                <div class="action-buttons">
-                    <button type="submit" class="btn primary">
-                        <i class="fas fa-save"></i> Update Payroll
-                    </button>
-                    <button type="button" class="btn secondary" onclick="document.getElementById('payroll-modal').style.display='none'">
-                        Cancel
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Transaction Modal -->
-    <div id="transaction-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Add Transaction</h3>
-                <button class="close-modal" onclick="document.getElementById('transaction-modal').style.display='none'">&times;</button>
-            </div>
-
-            <form id="transaction-form">
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label>Employee</label>
-                        <select id="transaction-employee-id">
-                            <option value="">Select Employee</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div id="dynamic-transaction-fields"></div>
-
-                <div class="action-buttons">
-                    <button type="submit" class="btn primary">
-                        <i class="fas fa-check"></i> Submit
-                    </button>
-                    <button type="button" class="btn secondary" onclick="document.getElementById('transaction-modal').style.display='none'">
-                        Cancel
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
+    <div id="payroll-modal" class="modal"><div class="modal-content" style="max-width: 500px;"><span class="close-button" onclick="closePayrollModal()">&times;</span><h3>Update Payroll Components</h3><form id="payroll-form"><input type="hidden" id="payroll-employee-index" name="index"><div class="form-group"><label for="payroll-name">Employee</label><input type="text" id="payroll-name" name="Name" readonly></div><div class="form-group"><label for="payroll-salary">Base Salary (PKR)</label><input type="number" id="payroll-salary" name="Base Salary" required></div><div class="form-group"><label for="payroll-travel">Travel Allowance (PKR)</label><input type="number" id="payroll-travel" name="Travel Allowance"></div><div class="form-group"><label for="payroll-fuel">Fuel/Grocery Allowance (PKR)</label><input type="number" id="payroll-fuel" name="Fuel/Grocery Allowance"></div><div class="form-group"><label for="payroll-other">Other Allowance (PKR)</label><input type="number" id="payroll-other" name="Other Allowance"></div><div class="form-group"><label for="payroll-pf">Provident Fund (PKR)</label><input type="number" id="payroll-pf" name="Provident Fund"></div><div class="form-group"><label for="payroll-eobi">EOBI (PKR)</label><input type="number" id="payroll-eobi" name="EOBI"></div><div style="padding: 12px; background: var(--background-color); border-radius: 6px; margin: 12px 0;"><strong>Cost to Company:</strong> <span id="payroll-ctc-preview">PKR 0</span></div><button type="submit">Save Payroll</button></form></div></div>
 
     <!-- Details Modal -->
-    <div id="details-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="metric-details-title">Details</h3>
-                <button class="close-modal" onclick="document.getElementById('details-modal').style.display='none'">&times;</button>
-            </div>
-            <div id="metric-details-content"></div>
-        </div>
-    </div>
-
+    <div id="details-modal" class="modal"><div class="modal-content"><span class="close-button" onclick="closeDetailsModal()">&times;</span><div id="employee-details-content"></div><div class="action-buttons"><button class="secondary" onclick="closeDetailsModal()">Close</button></div></div></div>
+    
     <!-- Department Details Modal -->
-    <div id="department-details-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="department-details-title">Department Details</h3>
-                <button class="close-modal" onclick="document.getElementById('department-details-modal').style.display='none'">&times;</button>
-            </div>
-            <div id="department-details-content"></div>
-        </div>
-    </div>
+    <div id="department-details-modal" class="modal"><div class="modal-content"><span class="close-button" onclick="closeDepartmentDetailsModal()">&times;</span><h3 id="department-details-title" style="margin-bottom: 20px;"></h3><div id="department-details-content"></div><div class="action-buttons"><button class="secondary" onclick="closeDepartmentDetailsModal()">Close</button></div></div></div>
 
-    <!-- Employee Details Modal -->
-    <div id="metric-details-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="employee-details-title">Employee Details</h3>
-                <button class="close-modal" onclick="document.getElementById('metric-details-modal').style.display='none'">&times;</button>
-            </div>
-            <div id="employee-details-content"></div>
-        </div>
-    </div>
+    <!-- Metric Details Modal -->
+    <div id="metric-details-modal" class="modal"><div class="modal-content"><span class="close-button" onclick="closeMetricDetailsModal()">&times;</span><h3 id="metric-details-title" style="margin-bottom: 20px;"></h3><div id="metric-details-content"></div><div class="action-buttons"><button class="secondary" onclick="closeMetricDetailsModal()">Close</button></div></div></div>
+
+    <!-- HR Transaction Modal -->
+    <div id="transaction-modal" class="modal"><div class="modal-content" style="max-width: 600px;"><span class="close-button" onclick="closeTransactionModal()">&times;</span><h3>Record HR Transaction</h3><form id="transaction-form"><div class="form-grid"><div class="form-group"><label for="transaction-type">Transaction Type</label><select id="transaction-type" name="type" required onchange="updateTransactionForm(this.value)"><option value="">Select Action...</option><option value="promotion">Salary/Position Change</option><option value="lwp">Leave Without Pay (LWP)</option><option value="termination">Termination / Leaver</option></select></div><div class="form-group"><label for="transaction-employee-id">Employee</label><select id="transaction-employee-id" name="employee_id" required><option value="">Select Employee...</option></select></div></div><div id="dynamic-transaction-fields" style="border-top: 1px solid var(--border-color); padding-top: 15px; margin-top: 15px;"></div><div class="form-grid"><div class="form-group"><label for="transaction-date">Effective Date</label><input type="date" id="transaction-date" name="effective_date" required></div></div><div class="form-group"><label for="transaction-notes">Detailed Notes</label><textarea id="transaction-notes" name="notes" rows="3" placeholder="Enter full details and rationale..."></textarea></div><button type="submit" id="transaction-submit-btn" style="width: 100%;">Log Transaction</button></form></div></div>
+
     <script>
         // ===================================================
         // PASSWORD PROTECTION
@@ -2585,7 +1635,8 @@
         // Chart rendering functions
         const renderGenderByDeptChart = () => {
             const deptGender = {};
-            employees.forEach(emp => {
+            const activeEmployees = employees.filter(e => e.Status !== 'Inactive');
+            activeEmployees.forEach(emp => {
                 const dept = emp.Department || 'Unassigned';
                 if (!deptGender[dept]) deptGender[dept] = { Male: 0, Female: 0, Other: 0 };
                 deptGender[dept][emp.Gender || 'Other']++;
@@ -2617,12 +1668,13 @@
         
         const renderEmploymentTypeChart = () => {
             const types = {};
-            employees.forEach(emp => {
+            const activeEmployees = employees.filter(e => e.Status !== 'Inactive');
+            activeEmployees.forEach(emp => {
                 const type = emp['Employment Type'] || 'Unspecified';
                 types[type] = (types[type] || 0) + 1;
             });
             
-            const total = employees.length;
+            const total = activeEmployees.length;
             let html = '<div style="font-size: 0.9rem;">';
             Object.entries(types).sort((a, b) => b[1] - a[1]).forEach(([type, count]) => {
                 const percent = (count / total * 100).toFixed(1);
@@ -2645,12 +1697,13 @@
         
         const renderDeptHeadcountChart = () => {
             const depts = {};
-            employees.forEach(emp => {
+            const activeEmployees = employees.filter(e => e.Status !== 'Inactive');
+            activeEmployees.forEach(emp => {
                 const dept = emp.Department || 'Unassigned';
                 depts[dept] = (depts[dept] || 0) + 1;
             });
             
-            const total = employees.length;
+            const total = activeEmployees.length;
             const maxCount = Math.max(...Object.values(depts));
             let html = '<div style="font-size: 0.9rem;">';
             Object.entries(depts).sort((a, b) => b[1] - a[1]).slice(0, 5).forEach(([dept, count]) => {
