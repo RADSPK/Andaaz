@@ -11,30 +11,27 @@
 
         /* Light Theme Variables: Vibrant Orange & Grey */
         :root {
-            --accent-color: #E85D04; /* Deep Orange */
-            --success-color: #06D6A0; /* Teal for success states */
-            --warning-color: #FFB627; /* Amber for warnings */
             --primary-color: #FF6B35; /* Vibrant Orange */
             --secondary-color: #F7931E; /* Medium Grey for subtle text */
             --background-color: #FFF8F3; /* Very light grey background */
             --card-bg: #FFFFFF; /* White cards */
-            --text-color: #333333; /* Dark Grey for main text */
+            --text-color: #2D3142; /* Dark Grey for main text */
             --border-color: #FFE5D9; /* Light Grey for borders */
             --light-icon-color: #FFD6C7; /* Very light grey for icons */
-            --border-radius: 12px;
-            --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            --border-radius: 16px;
+            --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             --transition-speed: 0.3s;
         }
 
-        /* Dark Theme Variables: Matching Grey Base */
+        /* Dark Theme Variables: Matching Orange Base */
         body.dark-theme {
             --primary-color: #FF8C5F; /* Lighter Orange for dark theme contrast */
-            --secondary-color: #B0B0B0;
-            --background-color: #2D2D2D;
-            --card-bg: #444444;
+            --secondary-color: #FFB08A;
+            --background-color: #1A1A2E;
+            --card-bg: #16213E;
             --text-color: #FFF8F3;
-            --border-color: #555555;
-            --light-icon-color: #555555;
+            --border-color: #2D3E50;
+            --light-icon-color: #2D3E50;
         }
 
         * {
@@ -57,7 +54,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #FF6B35 0%, #E85D04 100%);
+            background: linear-gradient(135deg, #FF6B35 0%, #E85D04 50%, #F7931E 100%);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -167,7 +164,7 @@
         .nav-link {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 16px;
             padding: 12px 16px;
             border-radius: var(--border-radius);
             color: var(--text-color);
@@ -290,7 +287,7 @@
 
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 30px rgba(255, 107, 53, 0.15);
         }
 
         .clickable-card {
@@ -299,7 +296,7 @@
 
         .clickable-card:hover {
             transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 12px 40px rgba(255, 107, 53, 0.2);
         }
 
         .clickable-card:active {
@@ -378,7 +375,7 @@
             margin-top: 10px;
         }
         #report-output-content table th, #report-output-content table td {
-            padding: 8px 12px;
+            padding: 8px 16px;
             text-align: left;
             border-bottom: 1px solid var(--border-color);
         }
@@ -420,7 +417,7 @@
         
         .status-badge {
             display: inline-block;
-            padding: 4px 12px;
+            padding: 4px 16px;
             border-radius: 9999px;
             font-size: 0.8rem;
             font-weight: 500;
@@ -534,7 +531,7 @@
         .details-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 12px;
+            gap: 16px;
             padding-top: 5px;
             margin-bottom: 15px;
         }
@@ -613,7 +610,7 @@
                 position: relative;
                 flex-direction: row;
                 justify-content: space-around;
-                padding: 12px;
+                padding: 16px;
             }
             .sidebar h2, .sidebar .nav-link span { display: none; }
             .nav-link { flex-direction: column; gap: 4px; font-size: 0.8rem; }
@@ -622,6 +619,26 @@
             .card-grid { grid-template-columns: 1fr; }
             .form-grid { grid-template-columns: 1fr; }
         }
+
+/* Enhanced Orange Gradient Buttons */
+.btn.primary, .toggle-button:hover, .refresh-btn:hover {
+    background: linear-gradient(135deg, #FF6B35 0%, #E85D04 100%);
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+}
+
+.btn.primary:hover, .refresh-btn:active {
+    background: linear-gradient(135deg, #E85D04 0%, #FF6B35 100%);
+    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+    transform: translateY(-2px);
+}
+
+/* Enhanced Card Top Border */
+.clickable-card {
+    border-top: 3px solid transparent;
+    background-image: linear-gradient(var(--card-bg), var(--card-bg)), linear-gradient(90deg, #FF6B35 0%, #F7931E 50%, #E85D04 100%);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+}
     </style>
 </head>
 <body>
@@ -644,7 +661,7 @@
                     <i class="fas fa-sign-in-alt"></i> Login
                 </button>
             </form>
-            <p style="margin-top: 20px; font-size: 12px; color: #999;">
+            <p style="margin-top: 20px; font-size: 16px; color: #999;">
                 Session expires when browser is closed
             </p>
         </div>
@@ -700,7 +717,7 @@
                 <div class="card-grid">
                     <div class="card clickable-card" onclick="showMetricDetails('total-payroll')"><div class="metric-content"><div class="value" id="total-payroll">PKR 0</div><p>Total Monthly Payroll</p></div><div class="metric-icon-container"><i class="fas fa-coins"></i></div></div>
                     <div class="card clickable-card" onclick="showMetricDetails('employment-types')" style="flex-direction: column; align-items: flex-start;">
-                        <div style="display: flex; justify-content: space-between; width: 100%; margin-bottom: 12px;">
+                        <div style="display: flex; justify-content: space-between; width: 100%; margin-bottom: 16px;">
                             <h3 style="font-size: 0.9rem; color: var(--secondary-color); text-transform: uppercase; letter-spacing: 0.5px;">Employment Types</h3>
                             <div class="metric-icon-container" style="font-size: 2rem;"><i class="fas fa-users-cog"></i></div>
                         </div>
@@ -771,7 +788,7 @@
                 <div class="section-header">
                     <h2>All Employees</h2>
                     <div style="display: flex; gap: 10px; align-items: center;">
-                        <input type="text" id="employee-search" placeholder="Search employees..." style="padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border-color);">
+                        <input type="text" id="employee-search" placeholder="Search employees..." style="padding: 8px 16px; border-radius: 8px; border: 1px solid var(--border-color);">
                         <button onclick="clearAllFilters()" class="action-buttons secondary" style="padding: 8px 16px; white-space: nowrap;">
                             <i class="fas fa-times-circle"></i> Clear Filters
                         </button>
@@ -844,7 +861,7 @@
                     <h3>Generate Custom Report</h3>
                     <form id="report-form" style="width: 100%;"><div class="form-grid"><div class="form-group"><label for="report-type">Report Type</label><select id="report-type" name="reportType" required><option value="">Select Report Type...</option><optgroup label="Employee Reports"><option value="joining">New Joinings Report</option><option value="leaving">Leaving/Termination Report</option><option value="contact">Complete Employee Directory</option><option value="employee-status">Employee Status Analysis</option><option value="tenure-analysis">Employee Tenure Analysis</option></optgroup><optgroup label="Financial Reports"><option value="payroll">Detailed Payroll Report</option><option value="department-salary">Department-wise Salary Breakdown</option><option value="salary-distribution">Salary Range Distribution</option><option value="allowances-breakdown">Allowances & Benefits Breakdown</option><option value="cost-center-analysis">Cost Center Analysis</option></optgroup><optgroup label="Analytical Reports"><option value="gender-analytics">Gender Distribution Analytics</option><option value="turnover-analysis">Turnover & Retention Analysis</option><option value="headcount-trends">Headcount Trends Report</option><option value="department-comparison">Department Performance Comparison</option><option value="work-mode-analysis">Work Mode & Leave Analysis</option><option value="recruitment-efficiency">Recruitment Efficiency Report</option></optgroup><optgroup label="Compliance Reports"><option value="provident-fund">Provident Fund Report</option><option value="eobi-report">EOBI Contribution Report</option><option value="tax-summary">Tax Deduction Summary</option></optgroup></select></div><div class="form-group"><label for="report-start-date">Start Date (Optional)</label><input type="date" id="report-start-date" name="startDate"></div><div class="form-group"><label for="report-end-date">End Date (Optional)</label><input type="date" id="report-end-date" name="endDate"></div><div class="form-group"><label for="report-department">Department Filter</label><select id="report-department" name="department"><option value="">All Departments</option></select></div><div class="form-group"><label for="report-status">Status Filter</label><select id="report-status" name="status"><option value="">All Statuses</option><option value="Active">Active Only</option><option value="Inactive">Inactive Only</option><option value="WFH">WFH Only</option><option value="On Leave">On Leave</option></select></div><div class="form-group"><label for="report-gender">Gender Filter</label><select id="report-gender" name="gender"><option value="">All</option><option value="Male">Male</option><option value="Female">Female</option></select></div></div><button type="submit" style="margin-top: 10px;">Generate Report</button></form>
                 </div>
-                <div class="card" style="margin-top: 20px; flex-direction: column; align-items: flex-start;"><div style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 10px;"><h3>Report Output & Analytics</h3><button class="action-buttons primary" id="download-report-btn" style="display: none; padding: 6px 12px;" onclick="downloadReport()"><i class="fas fa-download"></i> Download CSV</button></div><div id="report-output-content" style="width: 100%; min-height: 100px;"><p style="color: var(--secondary-color);">Select a report type and click "Generate Report" to view detailed analytics.</p></div></div>
+                <div class="card" style="margin-top: 20px; flex-direction: column; align-items: flex-start;"><div style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 10px;"><h3>Report Output & Analytics</h3><button class="action-buttons primary" id="download-report-btn" style="display: none; padding: 6px 16px;" onclick="downloadReport()"><i class="fas fa-download"></i> Download CSV</button></div><div id="report-output-content" style="width: 100%; min-height: 100px;"><p style="color: var(--secondary-color);">Select a report type and click "Generate Report" to view detailed analytics.</p></div></div>
             </section>
         </main>
     </div>
@@ -853,7 +870,7 @@
     <div id="employee-modal" class="modal"><div class="modal-content"><span class="close-button" onclick="closeEmployeeModal()">&times;</span><h3 style="margin-bottom: 15px;">Add/Edit Employee Details</h3><div class="tab-controls"><button class="tab-button active" data-tab="personal">Personal & Contact</button><button class="tab-button" data-tab="employment">Employment</button><button class="tab-button" data-tab="compensation">Compensation</button></div><form id="employee-form"><input type="hidden" id="employee-index" name="index"><div id="tab-personal" class="tab-content active"><div class="form-grid"><div class="form-group"><label for="employee-name">Name</label><input type="text" id="employee-name" name="Name" required></div><div class="form-group"><label for="employee-id">ID</label><input type="text" id="employee-id" name="ID" required></div><div class="form-group"><label for="employee-gender">Gender</label><select id="employee-gender" name="Gender" required><option value="Male">Male</option><option value="Female">Female</option><option value="Other">Other</option></select></div><div class="form-group"><label for="employee-contact">Contact Number</label><input type="text" id="employee-contact" name="Contact Number"></div><div class="form-group"><label for="employee-address">Address</label><textarea id="employee-address" name="Address" rows="1"></textarea></div><div class="form-group"><label for="employee-profile-pic">Profile Picture</label><input type="file" id="employee-profile-pic" accept="image/*"><img id="profile-pic-preview" class="profile-pic-preview" style="display: none;" alt="Profile Preview"></div><div class="form-group"><label for="employee-emergency-name">Emergency Name</label><input type="text" id="employee-emergency-name" name="Emergency Name"></div><div class="form-group"><label for="employee-emergency-rel">Emergency Relationship</label><input type="text" id="employee-emergency-rel" name="Emergency Relationship"></div><div class="form-group"><label for="employee-emergency-phone">Emergency Phone</label><input type="text" id="employee-emergency-phone" name="Emergency Phone"></div></div></div><div id="tab-employment" class="tab-content"><div class="form-grid"><div class="form-group"><label for="employee-dept">Department</label><input type="text" id="employee-dept" name="Department" required></div><div class="form-group"><label for="employee-pos">Position</label><input type="text" id="employee-pos" name="Position" required></div><div class="form-group"><label for="employee-emptype">Employment Type</label><input type="text" id="employee-emptype" name="Employment Type"></div><div class="form-group"><label for="employee-postype">Position Type</label><input type="text" id="employee-postype" name="Position Type"></div><div class="form-group"><label for="employee-supervisor">Supervisor</label><input type="text" id="employee-supervisor" name="Supervisor"></div><div class="form-group"><label for="employee-stationed">Stationed At</label><input type="text" id="employee-stationed" name="Stationed At"></div><div class="form-group"><label for="employee-fieldcity">Field Office City</label><input type="text" id="employee-fieldcity" name="Field Office City"></div><div class="form-group"><label for="employee-doj">Date of Joining</label><input type="date" id="employee-doj" name="Date of Joining" required></div><div class="form-group"><label for="employee-dol">Date of Leaving</label><input type="date" id="employee-dol" name="Date of Leaving"></div><div class="form-group"><label for="employee-status">Status</label><select id="employee-status" name="Status"><option value="Active">Active</option><option value="WFH">Work From Home (WFH)</option><option value="Annual Leave">Annual Leave</option><option value="Short Leave">Short Leave</option><option value="On Leave">On Leave (Other)</option><option value="Inactive">Inactive</option></select></div><div class="form-group"><label for="employee-termination-reason">Termination Reason</label><textarea id="employee-termination-reason" name="Termination Reason" rows="1"></textarea></div><div class="form-group"><label for="employee-skills">Skills</label><textarea id="employee-skills" name="Skills" rows="1"></textarea></div></div></div><div id="tab-compensation" class="tab-content"><div class="form-grid"><div class="form-group"><label for="employee-salary">Base Salary (PKR)</label><input type="number" id="employee-salary" name="Base Salary" required></div><div class="form-group"><label for="employee-travel">Travel Allowance (PKR)</label><input type="number" id="employee-travel" name="Travel Allowance"></div><div class="form-group"><label for="employee-fuel">Fuel/Grocery Allowance (PKR)</label><input type="number" id="employee-fuel" name="Fuel/Grocery Allowance"></div><div class="form-group"><label for="employee-other">Other Allowance (PKR)</label><input type="number" id="employee-other" name="Other Allowance"></div><div class="form-group"><label for="employee-pf">Provident Fund (PKR)</label><input type="number" id="employee-pf" name="Provident Fund"></div><div class="form-group"><label for="employee-eobi">EOBI (PKR)</label><input type="number" id="employee-eobi" name="EOBI"></div><div class="form-group"><label for="employee-cost-center">Cost Center</label><input type="text" id="employee-cost-center" name="Cost Center"></div></div></div><button type="submit" style="margin-top: 20px; width: 100%;">Save Employee</button></form></div></div>
 
     <!-- Payroll Modal -->
-    <div id="payroll-modal" class="modal"><div class="modal-content" style="max-width: 500px;"><span class="close-button" onclick="closePayrollModal()">&times;</span><h3>Update Payroll Components</h3><form id="payroll-form"><input type="hidden" id="payroll-employee-index" name="index"><div class="form-group"><label for="payroll-name">Employee</label><input type="text" id="payroll-name" name="Name" readonly></div><div class="form-group"><label for="payroll-salary">Base Salary (PKR)</label><input type="number" id="payroll-salary" name="Base Salary" required></div><div class="form-group"><label for="payroll-travel">Travel Allowance (PKR)</label><input type="number" id="payroll-travel" name="Travel Allowance"></div><div class="form-group"><label for="payroll-fuel">Fuel/Grocery Allowance (PKR)</label><input type="number" id="payroll-fuel" name="Fuel/Grocery Allowance"></div><div class="form-group"><label for="payroll-other">Other Allowance (PKR)</label><input type="number" id="payroll-other" name="Other Allowance"></div><div class="form-group"><label for="payroll-pf">Provident Fund (PKR)</label><input type="number" id="payroll-pf" name="Provident Fund"></div><div class="form-group"><label for="payroll-eobi">EOBI (PKR)</label><input type="number" id="payroll-eobi" name="EOBI"></div><div style="padding: 12px; background: var(--background-color); border-radius: 6px; margin: 12px 0;"><strong>Cost to Company:</strong> <span id="payroll-ctc-preview">PKR 0</span></div><button type="submit">Save Payroll</button></form></div></div>
+    <div id="payroll-modal" class="modal"><div class="modal-content" style="max-width: 500px;"><span class="close-button" onclick="closePayrollModal()">&times;</span><h3>Update Payroll Components</h3><form id="payroll-form"><input type="hidden" id="payroll-employee-index" name="index"><div class="form-group"><label for="payroll-name">Employee</label><input type="text" id="payroll-name" name="Name" readonly></div><div class="form-group"><label for="payroll-salary">Base Salary (PKR)</label><input type="number" id="payroll-salary" name="Base Salary" required></div><div class="form-group"><label for="payroll-travel">Travel Allowance (PKR)</label><input type="number" id="payroll-travel" name="Travel Allowance"></div><div class="form-group"><label for="payroll-fuel">Fuel/Grocery Allowance (PKR)</label><input type="number" id="payroll-fuel" name="Fuel/Grocery Allowance"></div><div class="form-group"><label for="payroll-other">Other Allowance (PKR)</label><input type="number" id="payroll-other" name="Other Allowance"></div><div class="form-group"><label for="payroll-pf">Provident Fund (PKR)</label><input type="number" id="payroll-pf" name="Provident Fund"></div><div class="form-group"><label for="payroll-eobi">EOBI (PKR)</label><input type="number" id="payroll-eobi" name="EOBI"></div><div style="padding: 16px; background: var(--background-color); border-radius: 6px; margin: 12px 0;"><strong>Cost to Company:</strong> <span id="payroll-ctc-preview">PKR 0</span></div><button type="submit">Save Payroll</button></form></div></div>
 
     <!-- Details Modal -->
     <div id="details-modal" class="modal"><div class="modal-content"><span class="close-button" onclick="closeDetailsModal()">&times;</span><div id="employee-details-content"></div><div class="action-buttons"><button class="secondary" onclick="closeDetailsModal()">Close</button></div></div></div>
@@ -1334,14 +1351,14 @@
                      <div class="card"><div class="metric-content"><div class="value">PKR ${dept.totalCTC.toLocaleString(undefined, {maximumFractionDigits: 0})}</div><p>Total Department Cost</p></div><div class="metric-icon-container"><i class="fas fa-coins"></i></div></div>
                 </div>
                 <div class="card" style="margin-bottom: 20px; padding: 16px;">
-                    <h4 style="margin-bottom: 12px;">Gender Distribution</h4>
+                    <h4 style="margin-bottom: 16px;">Gender Distribution</h4>
                     <div style="display: flex; gap: 2px; height: 32px; border-radius: 6px; overflow: hidden; margin-bottom: 8px;">
                         <div style="background: #6B9BD1; width: ${malePercent}%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 0.9rem;">${dept.maleCount > 0 ? dept.maleCount + ' Male' : ''}</div>
                         <div style="background: #FF8C5F; width: ${femalePercent}%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 0.9rem;">${dept.femaleCount > 0 ? dept.femaleCount + ' Female' : ''}</div>
                     </div>
                     <div style="display: flex; gap: 16px; font-size: 0.85rem;">
-                        <div><span style="display: inline-block; width: 12px; height: 12px; background: #6B9BD1; border-radius: 2px; margin-right: 6px;"></span>Male: ${malePercent}%</div>
-                        <div><span style="display: inline-block; width: 12px; height: 12px; background: #FF8C5F; border-radius: 2px; margin-right: 6px;"></span>Female: ${femalePercent}%</div>
+                        <div><span style="display: inline-block; width: 16px; height: 16px; background: #6B9BD1; border-radius: 2px; margin-right: 6px;"></span>Male: ${malePercent}%</div>
+                        <div><span style="display: inline-block; width: 16px; height: 16px; background: #FF8C5F; border-radius: 2px; margin-right: 6px;"></span>Female: ${femalePercent}%</div>
                     </div>
                 </div>
                 ${employeeTable}`;
@@ -1869,14 +1886,14 @@
                 const femalePercent = dept.employeeCount > 0 ? ((dept.femaleCount / dept.employeeCount) * 100).toFixed(0) : 0;
                 return `<div class="card department-card" onclick="openDepartmentDetailsModal(${JSON.stringify(dept).replace(/"/g, "'")})">
                     <div class="metric-content" style="width: 100%;">
-                        <h3 style="margin-bottom: 12px;">${dept.name}</h3>
-                        <div style="display: flex; gap: 16px; margin-bottom: 12px;">
+                        <h3 style="margin-bottom: 16px;">${dept.name}</h3>
+                        <div style="display: flex; gap: 16px; margin-bottom: 16px;">
                             <div>
                                 <div class="value" style="font-size: 2rem;">${dept.employeeCount}</div>
                                 <p style="font-size: 0.85rem;">Active Employees</p>
                             </div>
                             <div style="flex: 1; padding-left: 16px; border-left: 1px solid var(--border-color);">
-                                <div style="display: flex; gap: 12px; margin-bottom: 6px;">
+                                <div style="display: flex; gap: 16px; margin-bottom: 6px;">
                                     <div>
                                         <div style="font-size: 1.1rem; font-weight: 600; color: var(--primary-color);">${dept.wfhCount}</div>
                                         <p style="font-size: 0.75rem; color: var(--secondary-color);">WFH</p>
@@ -1886,7 +1903,7 @@
                                         <p style="font-size: 0.75rem; color: var(--secondary-color);">On Leave</p>
                                     </div>
                                 </div>
-                                <div style="display: flex; gap: 12px; margin-bottom: 6px;">
+                                <div style="display: flex; gap: 16px; margin-bottom: 6px;">
                                     <div>
                                         <div style="font-size: 1.3rem; font-weight: 600; color: #6B9BD1;">${dept.maleCount}</div>
                                         <p style="font-size: 0.75rem; color: var(--secondary-color);">Male</p>
@@ -1902,7 +1919,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div style="padding-top: 12px; border-top: 1px solid var(--border-color);">
+                        <div style="padding-top: 16px; border-top: 1px solid var(--border-color);">
                             <p style="color: var(--secondary-color); margin-bottom: 4px; font-size: 0.85rem;">Total Department Cost</p>
                             <div style="font-weight: 700; color: var(--primary-color); font-size: 1.5rem;">PKR ${dept.totalCTC.toLocaleString(undefined, {maximumFractionDigits: 0})}</div>
                         </div>
@@ -2110,7 +2127,7 @@
                     byDept[dept] = (byDept[dept] || 0) + 1;
                 });
                 analyticsHtml = `<div style="background: var(--background-color); padding: 16px; border-radius: 8px; margin-bottom: 16px;">
-                    <h4 style="margin-bottom: 12px; color: var(--primary-color);">Analytics Summary</h4>
+                    <h4 style="margin-bottom: 16px; color: var(--primary-color);">Analytics Summary</h4>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
                         <div><strong>Total Joiners:</strong> ${filteredData.length}</div>
                         <div><strong>Most Hiring Dept:</strong> ${Object.entries(byDept).sort((a,b) => b[1] - a[1])[0]?.[0] || 'N/A'}</div>
@@ -2134,7 +2151,7 @@
                 // Analytics
                 const avgTenure = filteredData.reduce((sum, emp) => sum + (parseFloat(emp['Tenure (Years)']) || 0), 0) / filteredData.length;
                 analyticsHtml = `<div style="background: var(--background-color); padding: 16px; border-radius: 8px; margin-bottom: 16px;">
-                    <h4 style="margin-bottom: 12px; color: var(--primary-color);">Turnover Analytics</h4>
+                    <h4 style="margin-bottom: 16px; color: var(--primary-color);">Turnover Analytics</h4>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
                         <div><strong>Total Leavers:</strong> ${filteredData.length}</div>
                         <div><strong>Avg Tenure:</strong> ${avgTenure.toFixed(1)} years</div>
@@ -2151,7 +2168,7 @@
                 const totalPayroll = filteredData.reduce((sum, emp) => sum + parseFloat(emp['Total Cost to Company'] || 0), 0);
                 const avgSalary = totalPayroll / filteredData.length;
                 analyticsHtml = `<div style="background: var(--background-color); padding: 16px; border-radius: 8px; margin-bottom: 16px;">
-                    <h4 style="margin-bottom: 12px; color: var(--primary-color);">Payroll Summary</h4>
+                    <h4 style="margin-bottom: 16px; color: var(--primary-color);">Payroll Summary</h4>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
                         <div><strong>Total Employees:</strong> ${filteredData.length}</div>
                         <div><strong>Total Payroll:</strong> PKR ${totalPayroll.toLocaleString(undefined, {maximumFractionDigits: 0})}</div>
@@ -2180,8 +2197,8 @@
                     statusCount[s] = (statusCount[s] || 0) + 1;
                 });
                 analyticsHtml = `<div style="background: var(--background-color); padding: 16px; border-radius: 8px; margin-bottom: 16px;">
-                    <h4 style="margin-bottom: 12px; color: var(--primary-color);">Status Distribution</h4>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px;">
+                    <h4 style="margin-bottom: 16px; color: var(--primary-color);">Status Distribution</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px;">
                         ${Object.entries(statusCount).map(([status, count]) => 
                             `<div><strong>${status}:</strong> ${count} (${((count/filteredData.length)*100).toFixed(1)}%)</div>`
                         ).join('')}
@@ -2211,8 +2228,8 @@
                     categories[cat] = (categories[cat] || 0) + 1;
                 });
                 analyticsHtml = `<div style="background: var(--background-color); padding: 16px; border-radius: 8px; margin-bottom: 16px;">
-                    <h4 style="margin-bottom: 12px; color: var(--primary-color);">Tenure Analysis</h4>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
+                    <h4 style="margin-bottom: 16px; color: var(--primary-color);">Tenure Analysis</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
                         ${Object.entries(categories).map(([cat, count]) => 
                             `<div><strong>${cat}:</strong> ${count} employees</div>`
                         ).join('')}
@@ -2250,8 +2267,8 @@
                 
                 // Analytics by department
                 analyticsHtml = `<div style="background: var(--background-color); padding: 16px; border-radius: 8px; margin-bottom: 16px;">
-                    <h4 style="margin-bottom: 12px; color: var(--primary-color);">Department Cost Analysis</h4>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px;">
+                    <h4 style="margin-bottom: 16px; color: var(--primary-color);">Department Cost Analysis</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
                         ${Object.entries(deptTotals).sort((a,b) => b[1] - a[1]).map(([dept, cost]) => 
                             `<div><strong>${dept}:</strong> PKR ${cost.toLocaleString(undefined, {maximumFractionDigits: 0})} (${((cost/totalOrgCost)*100).toFixed(1)}%)</div>`
                         ).join('')}
@@ -2410,7 +2427,7 @@
                 }, 0);
                 
                 analyticsHtml = `<div style="background: var(--background-color); padding: 16px; border-radius: 8px; margin-bottom: 16px;">
-                    <h4 style="margin-bottom: 12px; color: var(--primary-color);">PF Summary</h4>
+                    <h4 style="margin-bottom: 16px; color: var(--primary-color);">PF Summary</h4>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
                         <div><strong>Total Employees:</strong> ${filteredData.length}</div>
                         <div><strong>Monthly PF Total:</strong> PKR ${totalPF.toLocaleString(undefined, {maximumFractionDigits: 0})}</div>
@@ -2429,7 +2446,7 @@
                 }));
                 
                 analyticsHtml = `<div style="background: var(--background-color); padding: 16px; border-radius: 8px; margin-bottom: 16px;">
-                    <h4 style="margin-bottom: 12px; color: var(--primary-color);">EOBI Summary</h4>
+                    <h4 style="margin-bottom: 16px; color: var(--primary-color);">EOBI Summary</h4>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
                         <div><strong>Total Employees:</strong> ${filteredData.length}</div>
                         <div><strong>Monthly EOBI Total:</strong> PKR ${(eobi * filteredData.length).toLocaleString()}</div>
